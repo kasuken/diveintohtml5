@@ -4,7 +4,7 @@ A whimsical, unicorn-themed reimagining of Mark Pilgrim's classic "Dive Into HTM
 
 ## 🌈 What Is This?
 
-This is a complete website clone of "Dive Into HTML5" (https://diveintohtml5.info) with a magical unicorn theme! Every page has been transformed with:
+This is a complete website clone of "Dive Into HTML5" (https://diveintohtml5.info) with a magical unicorn theme!
 
 - 🎨 **Beautiful unicorn-themed CSS** with gradients, animations, and sparkle effects
 - 🦄 **Whimsical storytelling** that makes HTML5 concepts memorable
@@ -211,8 +211,6 @@ This isn't just a theme makeover - the entire course has been modernized!
 - **Forms:** Modern validation API, accessibility focus
 - **Canvas:** HiDPI/Retina support, OffscreenCanvas
 - **All APIs:** Updated for universal modern browser support
-
-See `UPDATES-2025.md` and `NEW-PAGES-2025.md` for complete details!
 
 ## 🦄 Enjoy the Magic!
 
