@@ -99,40 +99,96 @@
 </form>
 </div>
 
-<h2>🔮 JavaScript Validation API</h2>
+<h2>🔮 JavaScript Validation API (Modern)</h2>
 
-<pre><code>// Check if form is valid
+<pre><code>// Modern validation with Constraint Validation API
+const form = document.querySelector('form');
+const emailInput = document.getElementById('email');
+
+// Check if form is valid
 if (form.checkValidity()) {
-  console.log('Form is valid!');
+  console.log('✅ Form is valid!');
+} else {
+  // Report validity issues to user
+  form.reportValidity();
 }
 
-// Check individual field
-var input = document.getElementById('email');
-if (input.validity.valid) {
-  console.log('Email is valid!');
-}
-
-// Get specific validation state
-if (input.validity.valueMissing) {
-  console.log('This field is required!');
-}
-if (input.validity.typeMismatch) {
-  console.log('Invalid email format!');
+// Check individual field with detailed state
+if (emailInput.validity.valid) {
+  console.log('✅ Email is valid!');
+} else {
+  // Check specific validation states
+  const v = emailInput.validity;
+  
+  if (v.valueMissing) console.log('⚠️ This field is required!');
+  if (v.typeMismatch) console.log('⚠️ Invalid email format!');
+  if (v.patternMismatch) console.log('⚠️ Pattern not matched!');
+  if (v.tooLong) console.log('⚠️ Too long!');
+  if (v.tooShort) console.log('⚠️ Too short!');
+  if (v.rangeUnderflow) console.log('⚠️ Too small!');
+  if (v.rangeOverflow) console.log('⚠️ Too large!');
+  if (v.stepMismatch) console.log('⚠️ Invalid step!');
+  
+  // Get the validation message
+  console.log(emailInput.validationMessage);
 }
 
 // Custom validation message
-input.setCustomValidity('Please enter a magical email address!');</code></pre>
+emailInput.setCustomValidity('Please enter a magical @unicorn.magic email!');
 
-<h2>🎯 Best Practices</h2>
+// Clear custom validation when input changes
+emailInput.addEventListener('input', () =&gt; {
+  emailInput.setCustomValidity(''); // Clear to re-validate
+});
+
+// Modern approach: Prevent submit if invalid
+form.addEventListener('submit', (e) =&gt; {
+  if (!form.checkValidity()) {
+    e.preventDefault();
+    form.reportValidity(); // Shows browser's validation UI
+  }
+});</code></pre>
+
+<p>💡 <strong>2025 Tip:</strong> Use <code>reportValidity()</code> to show browser validation bubbles programmatically!</p>
+
+<h2>🎯 2025 Form Best Practices</h2>
 
 <ol style="list-style:decimal;padding-left:2em;">
-<li style="margin:0.5em 0;">Use the right input type for each field</li>
-<li style="margin:0.5em 0;">Provide helpful placeholder text and labels</li>
-<li style="margin:0.5em 0;">Use HTML5 validation, but also validate server-side!</li>
-<li style="margin:0.5em 0;">Test on mobile devices — input types affect keyboards</li>
-<li style="margin:0.5em 0;">Provide clear error messages</li>
-<li style="margin:0.5em 0;">Don't make everything required unless it truly is</li>
+<li style="margin:0.5em 0;"><strong>Use semantic input types</strong> — Affects mobile keyboards and validation</li>
+<li style="margin:0.5em 0;"><strong>Autocomplete attributes</strong> — Help browsers autofill correctly (name, email, address, etc.)</li>
+<li style="margin:0.5em 0;"><strong>Label everything</strong> — Use <code>&lt;label&gt;</code> for accessibility</li>
+<li style="margin:0.5em 0;"><strong>Validate client AND server-side</strong> — Client for UX, server for security!</li>
+<li style="margin:0.5em 0;"><strong>Test on mobile</strong> — Input types affect virtual keyboards</li>
+<li style="margin:0.5em 0;"><strong>Clear error messages</strong> — Tell users exactly what's wrong and how to fix it</li>
+<li style="margin:0.5em 0;"><strong>Use <code>inputmode</code></strong> — Fine-tune virtual keyboards (numeric, decimal, etc.)</li>
+<li style="margin:0.5em 0;"><strong>Don't disable paste</strong> — Let users paste passwords/emails!</li>
+<li style="margin:0.5em 0;"><strong>Show password option</strong> — Let users toggle password visibility</li>
+<li style="margin:0.5em 0;"><strong>Consider datalist</strong> — Native autocomplete suggestions</li>
 </ol>
+
+<h3>✨ Modern Form Enhancements</h3>
+
+<pre><code>&lt;!-- Autocomplete for better UX --&gt;
+&lt;input type="email" name="email" autocomplete="email"&gt;
+&lt;input type="tel" name="phone" autocomplete="tel"&gt;
+
+&lt;!-- Input mode for mobile keyboards --&gt;
+&lt;input type="text" inputmode="numeric" pattern="[0-9]*"&gt;
+&lt;input type="text" inputmode="decimal"&gt;
+
+&lt;!-- Datalist for suggestions --&gt;
+&lt;input list="unicorn-names"&gt;
+&lt;datalist id="unicorn-names"&gt;
+  &lt;option value="Sparkles"&gt;
+  &lt;option value="Rainbow Dash"&gt;
+  &lt;option value="Stardust"&gt;
+&lt;/datalist&gt;
+
+&lt;!-- Min/max length --&gt;
+&lt;input type="text" minlength="3" maxlength="20"&gt;
+
+&lt;!-- File upload with accept --&gt;
+&lt;input type="file" accept="image/*" multiple&gt;</code></pre>
 
 <blockquote>
 <p>"Good forms respect the user's time. Great forms make data entry feel magical!"</p>
@@ -144,9 +200,20 @@ input.setCustomValidity('Please enter a magical email address!');</code></pre>
 <p><a href="extensibility.html">Continue to Chapter 11: Advanced Unicorn Spells →</a></p>
 
 <div class="pf">
-<h4>📋 Form Wisdom 📋</h4>
+<h4>📋 2025 Form Wisdom 📋</h4>
 <div class="moneybags">
-<p>HTML5 forms reduce the JavaScript you need to write, but remember: always validate on the server too! Client-side validation is for user experience, server-side validation is for security.</p>
+<p><strong>Security First:</strong> Client-side validation is for UX, not security. Always validate and sanitize on the server!</p>
+<p style="margin-top:1em;"><strong>Accessibility:</strong> Use <code>&lt;label&gt;</code> elements, provide error messages, ensure keyboard navigation works, and test with screen readers.</p>
+<p style="margin-top:1em;"><strong>2025 Features to Use:</strong></p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li><code>autocomplete</code> — Helps password managers and autofill</li>
+<li><code>inputmode</code> — Better mobile keyboard control</li>
+<li><code>datalist</code> — Native suggestions dropdown</li>
+<li><code>reportValidity()</code> — Show validation UI programmatically</li>
+<li>CSS <code>:invalid</code> and <code>:valid</code> — Style form states</li>
+</ul>
+<p style="margin-top:1em;">🎨 <strong>Modern Styling:</strong> Use CSS <code>:user-invalid</code> (instead of <code>:invalid</code>) to avoid showing errors before user interaction!</p>
+<p style="margin-top:1em;">📱 <strong>Mobile:</strong> Type <code>tel</code> shows numeric keypad, <code>email</code> shows @ key, <code>url</code> shows .com key!</p>
 </div>
 </div>
 

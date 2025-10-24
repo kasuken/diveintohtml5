@@ -36,18 +36,24 @@ h1:before{content:"Canvas Magic: "}
 
 <p>The text inside the canvas element is fallback content for browsers that don't support canvas (like trying to show a rainbow to a color-blind dragon).</p>
 
-<h2>🖌️ Drawing Your First Unicorn... er, Rectangle</h2>
+<h2>🖌️ Drawing Your First Rectangle (Modern JS)</h2>
 
 <p>Let's start simple. Here's how to draw a rectangle filled with unicorn purple:</p>
 
-<pre><code>var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
+<pre><code>const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
 
 // Fill with unicorn purple!
 ctx.fillStyle = '#9b59b6';
-ctx.fillRect(10, 10, 100, 50);</code></pre>
+ctx.fillRect(10, 10, 100, 50);
+
+// 2025 Tip: Set canvas size via JS, not CSS to avoid blurriness!
+canvas.width = 800;
+canvas.height = 600;</code></pre>
 
 <p>The <code>getContext('2d')</code> method returns a drawing context — think of it as your magical paintbrush and palette combined!</p>
+
+<p>💡 <strong>Canvas Resolution:</strong> Always set <code>width</code> and <code>height</code> attributes on the canvas element, not via CSS, to avoid pixelation!</p>
 
 <h2>🌈 Drawing Rainbows (Well, Colorful Shapes)</h2>
 
@@ -101,22 +107,45 @@ ctx.fillText('Unicorn Magic!', 50, 50);
 ctx.strokeStyle = '#ff69b4';
 ctx.strokeText('Sparkles!', 50, 100);</code></pre>
 
-<h2>🖼️ Images on Canvas</h2>
+<h2>🖼️ Images on Canvas (Modern)</h2>
 
 <p>You can draw images onto the canvas, manipulate them, and even create filters:</p>
 
-<pre><code>var img = new Image();
-img.onload = function() {
+<pre><code>const img = new Image();
+img.onload = () =&gt; {
+  // Draw image (basic)
   ctx.drawImage(img, 0, 0);
+  
+  // Draw with size control
+  ctx.drawImage(img, 0, 0, 200, 200);
+  
+  // Draw portion of image (sprite sheets!)
+  ctx.drawImage(img, 
+    srcX, srcY, srcWidth, srcHeight,  // Source rectangle
+    destX, destY, destWidth, destHeight  // Destination
+  );
 };
-img.src = 'unicorn.png';</code></pre>
+img.src = 'unicorn.png';
 
-<h2>✨ Gradients and Patterns</h2>
+// Modern: Using async/await with promises
+async function loadImage(url) {
+  return new Promise((resolve, reject) =&gt; {
+    const img = new Image();
+    img.onload = () =&gt; resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+const unicorn = await loadImage('unicorn.png');
+ctx.drawImage(unicorn, 0, 0);</code></pre>
+
+<h2>✨ Gradients and Patterns (Enhanced)</h2>
 
 <p>Create beautiful rainbow gradients:</p>
 
 <pre><code>// Linear gradient
-var gradient = ctx.createLinearGradient(0, 0, 200, 0);
+const gradient = ctx.createLinearGradient(0, 0, 200, 0);
 gradient.addColorStop(0, '#9b59b6');
 gradient.addColorStop(0.5, '#ff69b4');
 gradient.addColorStop(1, '#87ceeb');
@@ -124,42 +153,108 @@ ctx.fillStyle = gradient;
 ctx.fillRect(0, 0, 200, 100);
 
 // Radial gradient (like unicorn magic emanating)
-var radial = ctx.createRadialGradient(100, 100, 10, 100, 100, 100);
+const radial = ctx.createRadialGradient(100, 100, 10, 100, 100, 100);
 radial.addColorStop(0, '#ffd700');
 radial.addColorStop(1, '#9b59b6');
 ctx.fillStyle = radial;
+ctx.arc(100, 100, 100, 0, Math.PI * 2);
+ctx.fill();
+
+// Conic gradient (NEW in modern browsers!)
+const conic = ctx.createConicGradient(0, 100, 100);
+conic.addColorStop(0, 'red');
+conic.addColorStop(0.25, 'yellow');
+conic.addColorStop(0.5, 'green');
+conic.addColorStop(0.75, 'blue');
+conic.addColorStop(1, 'red');
+ctx.fillStyle = conic;
 ctx.fillRect(0, 0, 200, 200);</code></pre>
 
-<h2>🎬 Animation</h2>
+<p>🆕 <strong>2025 Feature:</strong> Conic gradients create circular rainbow effects - perfect for color wheels and magical auras!</p>
 
-<p>The real magic happens when you animate! Use <code>requestAnimationFrame</code> for smooth, unicorn-approved animations:</p>
+<h2>🎬 Animation (Modern Best Practices)</h2>
 
-<pre><code>function animate() {
+<p>The real magic happens when you animate! Use <code>requestAnimationFrame</code> for smooth, 60fps animations:</p>
+
+<pre><code>let x = 0;
+let animationId;
+
+function animate(timestamp) {
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
   // Draw something
   ctx.fillStyle = '#ff69b4';
-  ctx.fillRect(x, y, 50, 50);
+  ctx.fillRect(x, 100, 50, 50);
   
   // Update position
   x += 2;
+  if (x > canvas.width) x = -50;
   
-  // Loop
-  requestAnimationFrame(animate);
+  // Continue animation
+  animationId = requestAnimationFrame(animate);
 }
 
-animate();</code></pre>
+// Start animation
+animationId = requestAnimationFrame(animate);
 
-<h2>💡 Canvas Best Practices</h2>
+// Stop animation when needed (important!)
+function stopAnimation() {
+  cancelAnimationFrame(animationId);
+}
+
+// 2025 Best Practice: Delta time for frame-independent movement
+let lastTime = 0;
+function animateSmooth(timestamp) {
+  const deltaTime = (timestamp - lastTime) / 1000; // seconds
+  lastTime = timestamp;
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Move at pixels per second, not per frame!
+  x += 100 * deltaTime; // 100 pixels per second
+  ctx.fillRect(x, 100, 50, 50);
+  
+  requestAnimationFrame(animateSmooth);
+}
+requestAnimationFrame(animateSmooth);</code></pre>
+
+<p>💡 <strong>Pro Tip:</strong> Use delta time for smooth animations that work at any frame rate!</p>
+
+<h2>💡 2025 Canvas Best Practices</h2>
 
 <ol style="list-style: decimal; padding-left: 2em;">
-<li style="margin: 1em 0;"><strong>Always check for support</strong> before using canvas (as we learned in the detection chapter).</li>
-<li style="margin: 1em 0;"><strong>Use requestAnimationFrame</strong> for animations, not setTimeout or setInterval.</li>
-<li style="margin: 1em 0;"><strong>Clear before redrawing</strong> to avoid ghosting effects (unless you want trails of unicorn magic!).</li>
-<li style="margin: 1em 0;"><strong>Save and restore context</strong> when changing styles temporarily.</li>
-<li style="margin: 1em 0;"><strong>Consider performance</strong> — canvas can be slow if you're drawing too much!</li>
+<li style="margin: 1em 0;"><strong>Set size properly</strong> — Use <code>canvas.width</code> and <code>canvas.height</code> attributes, not CSS, to avoid blurriness!</li>
+
+<li style="margin: 1em 0;"><strong>Use requestAnimationFrame</strong> — 60fps animations, not setTimeout. Remember to cancel it when done!</li>
+
+<li style="margin: 1em 0;"><strong>HiDPI/Retina support</strong> — Scale canvas by <code>devicePixelRatio</code> for crisp rendering on high-res displays.</li>
+
+<li style="margin: 1em 0;"><strong>OffscreenCanvas for performance</strong> — Render in Web Workers for heavy operations (modern browsers!).</li>
+
+<li style="margin: 1em 0;"><strong>Save/restore context</strong> — Use <code>ctx.save()</code> and <code>ctx.restore()</code> when temporarily changing styles.</li>
+
+<li style="margin: 1em 0;"><strong>Batch operations</strong> — Minimize state changes and draw calls for better performance.</li>
+
+<li style="margin: 1em 0;"><strong>Consider WebGL</strong> — For complex graphics, games, or 3D, use WebGL or libraries like Three.js.</li>
+
+<li style="margin: 1em 0;"><strong>Accessibility</strong> — Canvas isn't accessible by default. Provide fallback content or use ARIA labels.</li>
 </ol>
+
+<h3>🚀 High-DPI Canvas (Retina Ready)</h3>
+<pre><code>// Make canvas crisp on high-DPI displays
+function setupHiDPICanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  
+  return ctx;
+}</code></pre>
 
 <blockquote>
 <p>"Canvas is like a unicorn's imagination made real — limited only by your creativity and JavaScript skills."</p>
@@ -171,10 +266,20 @@ animate();</code></pre>
 <p><a href="video.html">Continue to Chapter 6: Moving Pictures from the Unicorn Realm →</a></p>
 
 <div class="pf">
-<h4>🎨 Canvas Resources 🎨</h4>
+<h4>🎨 2025 Canvas Resources 🎨</h4>
 <div class="moneybags">
-<p>Canvas is incredibly powerful! We've only scratched the surface here. You can create games, data visualizations, image editors, and so much more.</p>
-<p style="margin-top:1em;">For more in-depth canvas tutorials, check out MDN's Canvas Tutorial, or for games specifically, look into libraries like Phaser or PixiJS. The original <em>Dive Into HTML5</em> chapter on canvas is also excellent and goes into more technical detail!</p>
+<p>Canvas is incredibly powerful! Create games, data visualizations, image editors, generative art, and more!</p>
+<p style="margin-top:1em;"><strong>Modern Canvas Libraries (2025):</strong></p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li><strong>Konva.js</strong> — High-level 2D canvas library with events</li>
+<li><strong>Fabric.js</strong> — Interactive canvas objects and SVG parsing</li>
+<li><strong>P5.js</strong> — Creative coding and generative art</li>
+<li><strong>Paper.js</strong> — Vector graphics scripting</li>
+<li><strong>PixiJS</strong> — WebGL-powered 2D rendering (super fast!)</li>
+<li><strong>Three.js</strong> — 3D graphics with WebGL</li>
+</ul>
+<p style="margin-top:1em;"><strong>New 2025 Features:</strong> OffscreenCanvas (render in Web Workers), Conic gradients, better text rendering, Canvas2D filters!</p>
+<p style="margin-top:1em;">📚 <strong>Resources:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" style="color:#9b59b6;font-weight:bold;">MDN Canvas API</a> is the best reference!</p>
 </div>
 </div>
 

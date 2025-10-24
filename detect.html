@@ -23,50 +23,71 @@ h1:before{content:"Detection Magic: "}
 
 <p>In the old days, web developers would try to detect which browser someone was using and then guess what features it supported. This was about as reliable as guessing which way a unicorn would gallop. Instead, we use <strong>feature detection</strong> — we ask directly: "Can you do this magical thing?"</p>
 
-<h3>✨ Modernizr: Your Detection Familiar</h3>
+<h3>✨ Modern Feature Detection (No Libraries Needed!)</h3>
 
-<p>The most powerful tool in your detection arsenal is <strong>Modernizr</strong>, a JavaScript library that's like a magical familiar that can sense all types of browser magic. It creates a global Modernizr object with Boolean properties for each feature it tests.</p>
+<p>In 2025, we don't need external libraries like Modernizr anymore! Modern browsers support all the features we need, and we can detect capabilities using native JavaScript. Let's learn the best practices for feature detection!</p>
 
-<pre><code>if (Modernizr.canvas) {
+<pre><code>// Modern approach - direct feature detection
+if ('canvas' in document.createElement('canvas')) {
   // Draw rainbows with canvas magic! 🌈
 } else {
-  // Use a fallback spell
+  // Use a fallback spell (rare in 2025!)
 }</code></pre>
 
 <h2>🦄 Detection Techniques for Each Magic Type</h2>
 
 <h3>Canvas Magic Detection</h3>
 
-<p>To detect if a browser can paint on the magical canvas:</p>
+<p>To detect if a browser can paint on the magical canvas (though all modern browsers support this now!):</p>
 
 <pre><code>function supportsCanvas() {
-  var elem = document.createElement('canvas');
+  const elem = document.createElement('canvas');
   return !!(elem.getContext && elem.getContext('2d'));
-}</code></pre>
+}
 
-<p>This spell creates a test canvas element and checks if it has the mystical <code>getContext</code> method. If it does, you can paint rainbows to your heart's content!</p>
+// Modern browsers (2025): This is almost always true!
+// Consider using canvas directly with error handling instead</code></pre>
+
+<p>💡 <strong>2025 Best Practice:</strong> Instead of checking, just use canvas directly. All modern browsers support it. Focus error handling on actual usage failures, not feature detection.</p>
 
 <h3>Video Magic Detection</h3>
 
-<p>Detecting video support is slightly trickier, like determining which berries a unicorn prefers:</p>
+<p>For video codec support (useful for choosing the right format):</p>
 
-<pre><code>function supportsVideo() {
-  var elem = document.createElement('video');
-  return !!elem.canPlayType;
+<pre><code>function canPlayVideoType(type) {
+  const video = document.createElement('video');
+  return video.canPlayType(type) !== '';
 }
 
-function canPlayH264() {
-  var v = document.createElement('video');
-  return v.canPlayType('video/mp4; codecs="avc1.42E01E"');
-}</code></pre>
+// Check specific formats
+const supportsMP4 = canPlayVideoType('video/mp4');
+const supportsWebM = canPlayVideoType('video/webm');
+const supportsAV1 = canPlayVideoType('video/mp4; codecs="av01.0.05M.08"');
+
+// Modern best practice: Use MP4 (H.264/H.265) as primary,
+// WebM (VP9/AV1) as alternative for best browser support</code></pre>
+
+<p>💡 <strong>2025 Best Practice:</strong> Use <code>&lt;video&gt;</code> with multiple <code>&lt;source&gt;</code> elements. The browser automatically picks the first supported format!</p>
 
 <h3>Geolocation Magic Detection</h3>
 
 <p>Finding where unicorns roam (and where you are):</p>
 
-<pre><code>if (navigator.geolocation) {
+<pre><code>if ('geolocation' in navigator) {
   // You can track unicorn locations! 🗺️
   navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+// Modern alternative using Permissions API
+async function checkGeolocationPermission() {
+  const result = await navigator.permissions.query({name: 'geolocation'});
+  if (result.state === 'granted') {
+    // Permission already granted!
+  } else if (result.state === 'prompt') {
+    // Will ask user
+  } else {
+    // Permission denied
+  }
 }</code></pre>
 
 <h3>Local Storage Magic Detection</h3>
@@ -75,91 +96,134 @@ function canPlayH264() {
 
 <pre><code>function supportsLocalStorage() {
   try {
-    return 'localStorage' in window && 
-           window['localStorage'] !== null;
+    const test = '__storage_test__';
+    localStorage.setItem(test, test);
+    localStorage.removeItem(test);
+    return true;
   } catch(e) {
+    // Blocked by privacy settings, quota exceeded, or not supported
     return false;
   }
-}</code></pre>
+}
 
-<h2>⚡ The Power of Polyfills</h2>
+// Modern browsers (2025): localStorage is universally supported
+// But can be disabled in private browsing mode!</code></pre>
 
-<p>When a browser doesn't support certain magic, we can sometimes create it using <strong>polyfills</strong> — JavaScript spells that emulate modern features in older browsers. It's like teaching an old dragon new tricks!</p>
+<p>💡 <strong>2025 Best Practice:</strong> All modern browsers support localStorage, but users may have it disabled (private mode, cookies blocked). Always wrap in try-catch!</p>
 
-<p>For example, if a browser doesn't support the <code>&lt;canvas&gt;</code> element, you can use <strong>ExplorerCanvas</strong> (excanvas.js) to add canvas support to Internet Explorer 8 and earlier. It's not perfect magic, but it's better than leaving ancient dragon riders in the dark!</p>
+<h2>⚡ Polyfills Are Mostly History Now!</h2>
+
+<p>In 2025, polyfills are rarely needed! Modern browsers (Chrome, Firefox, Safari, Edge) all support HTML5 features natively. The days of Internet Explorer are long gone! 🎉</p>
+
+<p><strong>When you might still need polyfills:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">Very new/experimental features (check <a href="https://caniuse.com" target="_blank">Can I Use</a>)</li>
+<li style="margin:0.5em 0;">Supporting very old enterprise browsers (rare in 2025)</li>
+<li style="margin:0.5em 0;">Using cutting-edge CSS/JS proposals</li>
+</ul>
+
+<p>💡 <strong>Modern Approach:</strong> Use feature detection with graceful degradation, not polyfills. Let users know if their browser is too old instead of bloating your code!</p>
 
 <blockquote>
 <p>"Detection is not about shutting people out; it's about welcoming everyone in, each through their own magical doorway."</p>
 <cite>— The Inclusive Unicorn Manifesto</cite>
 </blockquote>
 
-<h2>🌈 Best Practices for Magical Detection</h2>
+<h2>🌈 2025 Best Practices for Feature Detection</h2>
 
 <ol style="list-style: decimal; padding-left: 2em;">
-<li style="margin: 1em 0;"><strong>Always detect features, never browsers.</strong> Browser sniffing is like judging a unicorn by its color — unreliable and potentially offensive.</li>
+<li style="margin: 1em 0;"><strong>Use native feature detection.</strong> No libraries needed in 2025! Check properties directly: <code>'geolocation' in navigator</code></li>
 
-<li style="margin: 1em 0;"><strong>Provide graceful fallbacks.</strong> If rainbow magic isn't available, offer regular colors. Everyone deserves to see your content!</li>
+<li style="margin: 1em 0;"><strong>Assume modern browsers.</strong> Focus on the latest 2-3 years of browsers. Internet Explorer is dead! 🪦</li>
 
-<li style="margin: 1em 0;"><strong>Test in real browsers.</strong> Simulators are like unicorn paintings — beautiful but not the real thing.</li>
+<li style="margin: 1em 0;"><strong>Use try-catch for storage APIs.</strong> Features may be disabled by privacy settings even in modern browsers.</li>
 
-<li style="margin: 1em 0;"><strong>Use established libraries.</strong> Don't reinvent the detection wheel. Modernizr has done the hard work!</li>
+<li style="margin: 1em 0;"><strong>Check Can I Use (caniuse.com).</strong> See real-world browser support statistics before implementing features.</li>
 
-<li style="margin: 1em 0;"><strong>Keep it simple.</strong> The best detection is clear, maintainable, and doesn't require a PhD in unicorn studies.</li>
+<li style="margin: 1em 0;"><strong>Provide user feedback, not silent degradation.</strong> If a required feature isn't available, tell users to upgrade their browser!</li>
+
+<li style="margin: 1em 0;"><strong>Use Progressive Enhancement.</strong> Build a solid baseline, then enhance with modern features.</li>
+
+<li style="margin: 1em 0;"><strong>Leverage the Permissions API.</strong> Modern way to check and request permissions for geolocation, notifications, etc.</li>
 </ol>
 
-<h2>📊 Detection Reference Table</h2>
+<h2>📊 2025 Feature Detection Reference</h2>
 
 <table>
 <thead>
 <tr>
 <th>Magical Feature</th>
 <th>Detection Method</th>
-<th>Polyfill Available?</th>
+<th>2025 Support</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Canvas</td>
-<td><code>!!elem.getContext</code></td>
-<td>Yes (ExplorerCanvas)</td>
+<td><code>!!elem.getContext?.('2d')</code></td>
+<td>✅ Universal (99.9%+)</td>
 </tr>
 <tr>
 <td>Video</td>
-<td><code>!!elem.canPlayType</code></td>
-<td>Partial (Flash fallback)</td>
+<td><code>elem.canPlayType('video/mp4')</code></td>
+<td>✅ Universal</td>
 </tr>
 <tr>
 <td>Geolocation</td>
 <td><code>'geolocation' in navigator</code></td>
-<td>Yes (geo.js)</td>
+<td>✅ Universal</td>
 </tr>
 <tr>
-<td>Local Storage</td>
-<td><code>'localStorage' in window</code></td>
-<td>Yes (storage.js)</td>
+<td>localStorage</td>
+<td><code>try { localStorage.test } catch</code></td>
+<td>✅ Universal (but may be disabled)</td>
+</tr>
+<tr>
+<td>Service Workers</td>
+<td><code>'serviceWorker' in navigator</code></td>
+<td>✅ Universal (requires HTTPS)</td>
 </tr>
 <tr>
 <td>Web Workers</td>
-<td><code>!!window.Worker</code></td>
-<td>No</td>
+<td><code>'Worker' in window</code></td>
+<td>✅ Universal</td>
 </tr>
 <tr>
-<td>Offline Apps</td>
-<td><code>!!window.applicationCache</code></td>
-<td>No</td>
+<td>IndexedDB</td>
+<td><code>'indexedDB' in window</code></td>
+<td>✅ Universal</td>
+</tr>
+<tr>
+<td>WebGL</td>
+<td><code>!!canvas.getContext('webgl')</code></td>
+<td>✅ 98%+ support</td>
+</tr>
+<tr>
+<td>WebSockets</td>
+<td><code>'WebSocket' in window</code></td>
+<td>✅ Universal</td>
+</tr>
+<tr>
+<td>WebRTC</td>
+<td><code>'RTCPeerConnection' in window</code></td>
+<td>✅ 97%+ support</td>
 </tr>
 </tbody>
 </table>
+
+<p style="margin-top:1em;font-style:italic;">💡 Note: AppCache (<code>applicationCache</code>) is deprecated and removed from modern browsers. Use Service Workers instead!</p>
 
 <p class="a">🌟 ✨ 🌈</p>
 
 <p><a href="semantics.html">Continue to Chapter 4: The Language of Unicorns →</a></p>
 
 <div class="pf">
-<h4>🔍 Detection Wisdom 🔍</h4>
+<h4>🔍 2025 Detection Wisdom 🔍</h4>
 <div class="moneybags">
-<p>This chapter is inspired by Mark Pilgrim's comprehensive guide to HTML5 feature detection. The techniques shown here are battle-tested and unicorn-approved!</p>
-<p style="margin-top:1em;">Remember: Good detection makes your site accessible to everyone, from those riding cutting-edge rainbow browsers to those on ancient Internet Explorer dragons. Inclusive magic is the best magic!</p>
+<p>This chapter is inspired by Mark Pilgrim's comprehensive guide to HTML5 feature detection, updated for 2025 modern web standards!</p>
+<p style="margin-top:1em;"><strong>The Big Change:</strong> In 2025, we no longer need Modernizr or polyfills for basic HTML5 features. All modern browsers (Chrome, Firefox, Safari, Edge) have excellent support. Internet Explorer is officially retired! 🎉</p>
+<p style="margin-top:1em;"><strong>Focus your efforts on:</strong> Progressive enhancement, proper error handling, and informing users with very old browsers to upgrade rather than maintaining legacy code.</p>
+<p style="margin-top:1em;">Check <a href="https://caniuse.com" target="_blank" style="color:#9b59b6;font-weight:bold;">Can I Use</a> for real-time browser support data!</p>
 </div>
 </div>
 

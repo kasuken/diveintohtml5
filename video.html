@@ -26,38 +26,65 @@
 
 <p>The <code>controls</code> attribute gives you a built-in play/pause button, volume control, and more — everything you need to control the magical viewing experience!</p>
 
-<h2>🎭 Multiple Video Formats</h2>
+<h2>🎭 Video Formats in 2025</h2>
 
-<p>Unfortunately, different browsers prefer different video formats (like how some unicorns prefer apples while others prefer carrots). The solution? Provide multiple formats!</p>
+<p>Great news! In 2025, video format wars are mostly over. Here's what you need to know:</p>
 
-<pre><code>&lt;video controls&gt;
+<p><strong>Modern best practice (2025):</strong> Use MP4 with H.264 or H.265 codec as your primary format. It's universally supported!</p>
+
+<pre><code>&lt;!-- Recommended 2025 approach --&gt;
+&lt;video controls&gt;
   &lt;source src="unicorn.mp4" type="video/mp4"&gt;
   &lt;source src="unicorn.webm" type="video/webm"&gt;
-  &lt;source src="unicorn.ogv" type="video/ogg"&gt;
   Your browser doesn't support the video element!
 &lt;/video&gt;</code></pre>
 
-<p>The browser will use the first format it understands, like a unicorn choosing its favorite treat from a buffet!</p>
+<p><strong>Format recommendations:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;"><strong>MP4 (H.264)</strong> — Universal support, use as primary ✅</li>
+<li style="margin:0.5em 0;"><strong>MP4 (H.265/HEVC)</strong> — Better compression, wide support in 2025 ⭐</li>
+<li style="margin:0.5em 0;"><strong>WebM (VP9/AV1)</strong> — Optional alternative for even better compression</li>
+<li style="margin:0.5em 0;"><strong>OGG</strong> — No longer needed! Legacy format 🪦</li>
+</ul>
+
+<p>💡 <strong>Pro tip:</strong> For most projects, MP4 with H.264 is enough. All modern browsers support it!</p>
 
 <h2>🎨 Video Attributes</h2>
 
 <ul style="list-style:disc;padding-left:2em;">
-<li style="margin:0.5em 0;"><code>controls</code> — Shows the playback controls</li>
-<li style="margin:0.5em 0;"><code>autoplay</code> — Starts playing automatically (use sparingly!)</li>
+<li style="margin:0.5em 0;"><code>controls</code> — Shows the playback controls ✅ Always recommended!</li>
+<li style="margin:0.5em 0;"><code>autoplay</code> — Auto-plays video (requires <code>muted</code> in most browsers!)</li>
+<li style="margin:0.5em 0;"><code>muted</code> — Starts with sound off (required for autoplay)</li>
 <li style="margin:0.5em 0;"><code>loop</code> — Plays the video on repeat, like an eternal unicorn dance</li>
-<li style="margin:0.5em 0;"><code>muted</code> — Starts with sound off</li>
 <li style="margin:0.5em 0;"><code>poster</code> — Image to show before the video plays</li>
-<li style="margin:0.5em 0;"><code>width</code> and <code>height</code> — Size of the video player</li>
+<li style="margin:0.5em 0;"><code>playsinline</code> — Prevents fullscreen on mobile (iOS especially)</li>
+<li style="margin:0.5em 0;"><code>preload</code> — How much to buffer: "none", "metadata", or "auto"</li>
+<li style="margin:0.5em 0;"><code>width</code> and <code>height</code> — Size of the video player (use CSS instead!)</li>
 </ul>
 
-<h2>✨ JavaScript Control</h2>
+<p><strong>2025 Best Practice Example:</strong></p>
+<pre><code>&lt;video 
+  controls 
+  playsinline 
+  preload="metadata" 
+  poster="unicorn-poster.jpg"
+  style="width: 100%; max-width: 800px; border-radius: 15px;"
+&gt;
+  &lt;source src="unicorn.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+
+<p>⚠️ <strong>Important:</strong> Most browsers block autoplay with sound. If you need autoplay, must include <code>muted</code> attribute!</p>
+
+<h2>✨ JavaScript Control (Modern API)</h2>
 
 <p>You can control video playback with JavaScript for truly magical interactions:</p>
 
-<pre><code>var video = document.getElementById('myVideo');
+<pre><code>const video = document.getElementById('myVideo');
 
-// Play
-video.play();
+// Play (returns a Promise in modern browsers!)
+video.play()
+  .then(() =&gt; console.log('Playing!'))
+  .catch(err =&gt; console.log('Autoplay blocked:', err));
 
 // Pause
 video.pause();
@@ -71,7 +98,17 @@ video.volume = 0.5;
 // Check if it's playing
 if (!video.paused) {
   console.log('Unicorns are dancing!');
-}</code></pre>
+}
+
+// Listen to events
+video.addEventListener('play', () =&gt; console.log('Started!'));
+video.addEventListener('pause', () =&gt; console.log('Paused!'));
+video.addEventListener('ended', () =&gt; console.log('Finished!'));
+video.addEventListener('timeupdate', () =&gt; {
+  console.log('Current time:', video.currentTime);
+});</code></pre>
+
+<p>💡 <strong>Modern JavaScript:</strong> <code>play()</code> now returns a Promise, making it easier to handle autoplay restrictions!</p>
 
 <h2>🎵 Audio Too!</h2>
 
@@ -79,9 +116,19 @@ if (!video.paused) {
 
 <pre><code>&lt;audio controls&gt;
   &lt;source src="unicorn-song.mp3" type="audio/mpeg"&gt;
-  &lt;source src="unicorn-song.ogg" type="audio/ogg"&gt;
+  &lt;source src="unicorn-song.webm" type="audio/webm"&gt;
   Your browser doesn't support audio magic!
 &lt;/audio&gt;</code></pre>
+
+<p><strong>2025 Audio Format Guide:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;"><strong>MP3</strong> — Universal support, use as primary ✅</li>
+<li style="margin:0.5em 0;"><strong>AAC (in MP4 container)</strong> — Better quality, universally supported</li>
+<li style="margin:0.5em 0;"><strong>Opus (in WebM)</strong> — Best compression, growing support</li>
+<li style="margin:0.5em 0;"><strong>OGG Vorbis</strong> — Legacy format, no longer needed 🪦</li>
+</ul>
+
+<p>💡 For most projects, MP3 is sufficient. All modern browsers support it perfectly!</p>
 
 <blockquote>
 <p>"Native video and audio support freed the web from plugin tyranny. Now we can all watch unicorns prance without installing anything!"</p>
@@ -93,9 +140,18 @@ if (!video.paused) {
 <p><a href="geolocation.html">Continue to Chapter 7: Where the Unicorns Are →</a></p>
 
 <div class="pf">
-<h4>🎥 Video Wisdom 🎥</h4>
+<h4>🎥 2025 Video Wisdom 🎥</h4>
 <div class="moneybags">
-<p>For production use, you'll want to encode your videos in multiple formats. Tools like FFmpeg can help with this. Also consider using a video hosting service like YouTube or Vimeo for easier management and better performance!</p>
+<p><strong>Encoding in 2025:</strong> Use tools like FFmpeg or HandBrake. For most projects, encoding to MP4 with H.264 codec is sufficient for universal compatibility!</p>
+<p style="margin-top:1em;"><strong>Video Hosting:</strong> For better performance, bandwidth savings, and built-in features (adaptive streaming, thumbnails), use:</p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li>YouTube (free, excellent CDN)</li>
+<li>Vimeo (professional, ad-free)</li>
+<li>Cloudflare Stream (developer-friendly)</li>
+<li>AWS CloudFront + S3 (full control)</li>
+</ul>
+<p style="margin-top:1em;"><strong>Pro tip:</strong> For self-hosted videos, enable adaptive bitrate streaming (HLS or DASH) for the best user experience across different connection speeds!</p>
+<p style="margin-top:1em;">🎬 Remember: Browsers now block autoplay with sound. Always include <code>muted</code> if you need autoplay functionality!</p>
 </div>
 </div>
 

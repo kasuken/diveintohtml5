@@ -22,116 +22,286 @@
 
 <p><strong>sessionStorage</strong> is like a temporary pouch. Data lasts only for the current session (until you close the tab).</p>
 
-<h2>🔮 Basic Usage</h2>
+<h2>🔮 Basic Usage (Modern 2025 Syntax)</h2>
 
 <p>Using localStorage is magically simple:</p>
 
 <pre><code>// Store a magical item
 localStorage.setItem('unicornName', 'Sparkles');
 
+// Alternative shorthand (works but setItem is preferred)
+localStorage.unicornName = 'Sparkles';
+
 // Retrieve it later
-var name = localStorage.getItem('unicornName');
+const name = localStorage.getItem('unicornName');
 console.log(name); // 'Sparkles'
 
 // Remove an item
 localStorage.removeItem('unicornName');
 
 // Clear everything
-localStorage.clear();</code></pre>
+localStorage.clear();
+
+// Check how many items are stored
+console.log(localStorage.length);</code></pre>
 
 <p>sessionStorage works exactly the same way:</p>
 
 <pre><code>sessionStorage.setItem('tempMagic', '✨');
-var magic = sessionStorage.getItem('tempMagic');</code></pre>
+const magic = sessionStorage.getItem('tempMagic');</code></pre>
 
-<h2>📦 What Can You Store?</h2>
+<p>⚠️ <strong>2025 Best Practice:</strong> Always wrap in try-catch! localStorage can be disabled in privacy mode:</p>
+
+<pre><code>try {
+  localStorage.setItem('test', 'value');
+} catch (e) {
+  console.error('Storage blocked:', e);
+  // Fallback to in-memory storage or inform user
+}</code></pre>
+
+<h2>📦 Storing Complex Data (Modern Approach)</h2>
 
 <p>localStorage and sessionStorage can only store strings. But you can store complex objects by converting them to JSON:</p>
 
-<pre><code>// Store an object
-var unicorn = {
+<pre><code>// Modern way - create a helper class
+class UnicornStorage {
+  static set(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (e) {
+      console.error('Storage failed:', e);
+      return false;
+    }
+  }
+  
+  static get(key, defaultValue = null) {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
+    } catch (e) {
+      console.error('Parse failed:', e);
+      return defaultValue;
+    }
+  }
+  
+  static remove(key) {
+    localStorage.removeItem(key);
+  }
+}
+
+// Usage
+const unicorn = {
   name: 'Rainbow Dash',
   color: 'rainbow',
   hornLength: 15,
   magicPower: 9000
 };
 
-localStorage.setItem('myUnicorn', JSON.stringify(unicorn));
+UnicornStorage.set('myUnicorn', unicorn);
+const retrieved = UnicornStorage.get('myUnicorn');
+console.log(retrieved.name); // 'Rainbow Dash'</code></pre>
 
-// Retrieve and parse
-var stored = localStorage.getItem('myUnicorn');
-var unicorn = JSON.parse(stored);
-console.log(unicorn.name); // 'Rainbow Dash'</code></pre>
+<p>💡 <strong>2025 Pro Tip:</strong> Consider using libraries like <a href="https://github.com/localForage/localForage" target="_blank" style="color:#9b59b6;">localForage</a> for automatic IndexedDB/localStorage fallback!</p>
 
-<h2>🎯 Practical Example</h2>
+<h2>🎯 Practical Modern Example</h2>
 
-<pre><code>// Save user preferences
-function savePreferences() {
-  var prefs = {
-    theme: 'unicorn-rainbow',
-    fontSize: 'large',
-    showSparkles: true
-  };
-  localStorage.setItem('userPrefs', JSON.stringify(prefs));
+<pre><code>// Save user preferences with modern async patterns
+class PreferenceManager {
+  static save(prefs) {
+    try {
+      localStorage.setItem('userPrefs', JSON.stringify({
+        ...prefs,
+        lastUpdated: new Date().toISOString()
+      }));
+      return true;
+    } catch (e) {
+      console.error('Failed to save preferences:', e);
+      return false;
+    }
+  }
+  
+  static load() {
+    try {
+      const stored = localStorage.getItem('userPrefs');
+      return stored ? JSON.parse(stored) : this.getDefaults();
+    } catch (e) {
+      console.error('Failed to load preferences:', e);
+      return this.getDefaults();
+    }
+  }
+  
+  static getDefaults() {
+    return {
+      theme: 'unicorn-rainbow',
+      fontSize: 'medium',
+      showSparkles: true,
+      reducedMotion: false
+    };
+  }
+  
+  static apply() {
+    const prefs = this.load();
+    document.documentElement.setAttribute('data-theme', prefs.theme);
+    document.documentElement.style.fontSize = prefs.fontSize;
+    if (prefs.reducedMotion) {
+      document.documentElement.classList.add('reduced-motion');
+    }
+  }
 }
 
-// Load preferences on page load
-function loadPreferences() {
-  var stored = localStorage.getItem('userPrefs');
-  if (stored) {
-    var prefs = JSON.parse(stored);
-    applyTheme(prefs.theme);
-    setFontSize(prefs.fontSize);
-    toggleSparkles(prefs.showSparkles);
-  }
-}</code></pre>
+// Use it
+document.addEventListener('DOMContentLoaded', () =&gt; {
+  PreferenceManager.apply();
+});
 
-<h2>⚡ Storage Events</h2>
+// Update preferences
+PreferenceManager.save({
+  theme: 'dark-unicorn',
+  fontSize: 'large',
+  showSparkles: false
+});</code></pre>
 
-<p>You can listen for changes to storage (useful when multiple tabs are open):</p>
+<h2>⚡ Storage Events (Cross-Tab Communication)</h2>
 
-<pre><code>window.addEventListener('storage', function(e) {
+<p>Listen for changes to storage across multiple tabs - perfect for real-time sync!</p>
+
+<pre><code>// Only fires in OTHER tabs, not the one making the change!
+window.addEventListener('storage', (e) =&gt; {
+  console.log('Storage changed!');
+  console.log('Key:', e.key);
+  console.log('Old value:', e.oldValue);
+  console.log('New value:', e.newValue);
+  console.log('URL:', e.url);
+  
+  // Example: Sync unicorn count across tabs
   if (e.key === 'unicornCount') {
-    console.log('Unicorns changed from', e.oldValue, 'to', e.newValue);
+    updateUnicornDisplay(e.newValue);
+  }
+});
+
+// Practical example: Logout from all tabs
+window.addEventListener('storage', (e) =&gt; {
+  if (e.key === 'loggedOut' && e.newValue === 'true') {
+    window.location.href = '/login';
   }
 });</code></pre>
 
-<h2>📏 Limits and Considerations</h2>
+<p>💡 <strong>Use case:</strong> Keep multiple tabs synchronized, logout from all tabs, sync shopping cart, etc!</p>
+
+<h2>📏 Limits and Considerations (2025 Update)</h2>
 
 <ul style="list-style:disc;padding-left:2em;">
-<li style="margin:0.5em 0;"><strong>Size limit:</strong> Usually 5-10MB per domain (plenty for most magical needs)</li>
-<li style="margin:0.5em 0;"><strong>Synchronous:</strong> Operations block the main thread (usually fast enough)</li>
-<li style="margin:0.5em 0;"><strong>String only:</strong> Remember to JSON.stringify objects</li>
-<li style="margin:0.5em 0;"><strong>Per origin:</strong> Data is separate for each domain</li>
-<li style="margin:0.5em 0;"><strong>Not secure:</strong> Don't store sensitive data like passwords!</li>
+<li style="margin:0.5em 0;"><strong>Size limit:</strong> 5-10MB per domain (varies by browser). Check usage with Storage Manager API!</li>
+<li style="margin:0.5em 0;"><strong>Synchronous:</strong> Operations block the main thread (use IndexedDB for large operations)</li>
+<li style="margin:0.5em 0;"><strong>String only:</strong> Must JSON.stringify/parse objects and arrays</li>
+<li style="margin:0.5em 0;"><strong>Per origin:</strong> Data is separate for each domain (good for security!)</li>
+<li style="margin:0.5em 0;"><strong>Not secure:</strong> Never store passwords, tokens, or sensitive data! Use HttpOnly cookies for auth.</li>
+<li style="margin:0.5em 0;"><strong>Can be disabled:</strong> Private browsing, user settings, or storage quotas can block access</li>
+<li style="margin:0.5em 0;"><strong>Not private:</strong> Browser extensions can access localStorage data</li>
 </ul>
 
-<h2>🗄️ IndexedDB for Bigger Magic</h2>
+<h3>💡 Check Storage Quota (Modern API)</h3>
+<pre><code>// Check available storage space (2025 feature!)
+if ('storage' in navigator && 'estimate' in navigator.storage) {
+  const estimate = await navigator.storage.estimate();
+  const percentUsed = (estimate.usage / estimate.quota * 100).toFixed(2);
+  console.log(`Using ${percentUsed}% of storage`);
+  console.log(`${estimate.usage} bytes used of ${estimate.quota}`);
+}</code></pre>
 
-<p>For larger amounts of data, there's <strong>IndexedDB</strong> — a full database in the browser! It's more complex but much more powerful:</p>
+<h2>🗄️ IndexedDB for Bigger Magic (2025 Approach)</h2>
 
-<pre><code>// IndexedDB is more complex, but worth it for big data
-var request = indexedDB.open('UnicornDB', 1);
+<p>For larger amounts of data (images, files, thousands of records), use <strong>IndexedDB</strong> — a full NoSQL database in the browser!</p>
 
-request.onsuccess = function(event) {
-  var db = event.target.result;
-  // Now you can store lots of magical data!
-};</code></pre>
+<p><strong>IndexedDB Benefits:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">💾 Much larger storage (hundreds of MB to GBs)</li>
+<li style="margin:0.5em 0;">⚡ Asynchronous (doesn't block UI)</li>
+<li style="margin:0.5em 0;">📊 Indexes for fast queries</li>
+<li style="margin:0.5em 0;">🔍 Can store Files, Blobs, ArrayBuffers</li>
+</ul>
 
-<blockquote>
-<p>"The best storage is the one that fits your needs. localStorage for simple preferences, IndexedDB for a whole magical inventory system!"</p>
-<cite>— Data Wizard Proverb</cite>
-</blockquote>
+<p><strong>2025 Best Practice - Use a wrapper library:</strong></p>
+
+<pre><code>// Use idb-keyval for simple key-value storage
+import { get, set, del } from 'idb-keyval';
+
+await set('unicorn', { name: 'Sparkles', power: 9000 });
+const unicorn = await get('unicorn');
+await del('unicorn');
+
+// Or use Dexie.js for full database features
+import Dexie from 'dexie';
+
+const db = new Dexie('UnicornDatabase');
+db.version(1).stores({
+  unicorns: '++id, name, color, power'
+});
+
+// Add unicorn
+await db.unicorns.add({
+  name: 'Rainbow Dash',
+  color: 'rainbow',
+  power: 9000
+});
+
+// Query
+const powerfulUnicorns = await db.unicorns
+  .where('power')
+  .above(5000)
+  .toArray();</code></pre>
+
+<p>💡 <strong>Don't write raw IndexedDB code!</strong> Use libraries like <a href="https://github.com/jakearchibald/idb-keyval" style="color:#9b59b6;" target="_blank">idb-keyval</a> or <a href="https://dexie.org/" style="color:#9b59b6;" target="_blank">Dexie</a> to avoid complexity!</p>
+
+<h2>🆕 Other Storage APIs (2025)</h2>
+
+<h3>🗃️ Cache API (with Service Workers)</h3>
+<pre><code>// Store HTTP responses for offline use
+const cache = await caches.open('unicorn-v1');
+await cache.add('/unicorn.jpg');
+const response = await cache.match('/unicorn.jpg');</code></pre>
+
+<h3>📁 File System Access API (New!)</h3>
+<pre><code>// Read/write actual files on user's system (requires permission)
+const [fileHandle] = await window.showOpenFilePicker();
+const file = await fileHandle.getFile();
+const contents = await file.text();</code></pre>
+
+<h3>🔐 Storage Manager API</h3>
+<pre><code>// Request persistent storage (won't be cleared under storage pressure)
+if (await navigator.storage.persist()) {
+  console.log('Storage will persist!');
+}</code></pre>
+
+<p><strong>Which storage to use?</strong></p>
+<table style="width:100%;margin:1em 0;">
+<tr><td><strong>User preferences</strong></td><td>→ localStorage</td></tr>
+<tr><td><strong>Session data</strong></td><td>→ sessionStorage</td></tr>
+<tr><td><strong>Large datasets</strong></td><td>→ IndexedDB</td></tr>
+<tr><td><strong>Offline pages/assets</strong></td><td>→ Cache API</td></tr>
+<tr><td><strong>Sensitive auth data</strong></td><td>→ HttpOnly cookies (server-side)</td></tr>
+</table>
 
 <p class="a">🌟 ✨ 🌈</p>
 
 <p><a href="offline.html">Continue to Chapter 9: Unicorn Magic That Works Offline →</a></p>
 
 <div class="pf">
-<h4>💾 Storage Wisdom 💾</h4>
+<h4>💾 2025 Storage Wisdom 💾</h4>
 <div class="moneybags">
-<p>localStorage is perfect for saving user preferences, shopping carts, form data, and other small pieces of information. For larger applications, consider IndexedDB or cloud storage solutions!</p>
-<p style="margin-top:1em;">Pro tip: Always wrap localStorage calls in try-catch blocks, as some browsers disable it in private browsing mode!</p>
+<p><strong>localStorage</strong> is perfect for user preferences, theme settings, and small app state. <strong>IndexedDB</strong> for everything else!</p>
+<p style="margin-top:1em;"><strong>Critical 2025 Best Practices:</strong></p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li>✅ Always wrap in try-catch (private mode blocks storage)</li>
+<li>✅ Never store sensitive data (passwords, tokens)</li>
+<li>✅ Use helper libraries for IndexedDB (idb-keyval, Dexie)</li>
+<li>✅ Check storage quota with Storage Manager API</li>
+<li>✅ Consider data expiration (add timestamps)</li>
+<li>⛔ Don't block the main thread with large localStorage operations</li>
+</ul>
+<p style="margin-top:1em;"><strong>Security:</strong> localStorage is accessible to JavaScript on the page, including third-party scripts. For authentication tokens, use HttpOnly cookies. For encryption, consider <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto" target="_blank" style="color:#9b59b6;">Web Crypto API</a>!</p>
+<p style="margin-top:1em;">🎯 <strong>Modern approach:</strong> Use <a href="https://github.com/localForage/localForage" target="_blank" style="color:#9b59b6;font-weight:bold;">localForage</a> which automatically uses IndexedDB/WebSQL/localStorage with a simple API!</p>
 </div>
 </div>
 

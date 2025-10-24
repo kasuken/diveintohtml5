@@ -16,101 +16,199 @@
 
 <p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">S</span>ometimes unicorns venture into places where rainbows don't reach — deep caves, ancient forests, or (gasp!) areas with no internet connection! Your web applications can work in these magical dead zones too, thanks to offline capabilities!</p>
 
-<h2>📡 Service Workers: The Modern Way</h2>
+<h2>📡 Service Workers: The 2025 Standard</h2>
 
-<p>Service Workers are like magical helpers that intercept network requests and can serve cached content when offline:</p>
+<p>Service Workers are the modern way to make web apps work offline. They're like magical helpers that sit between your app and the network!</p>
 
-<pre><code>// Register a service worker
+<p><strong>Requirements:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">✅ HTTPS (required for security, except on localhost)</li>
+<li style="margin:0.5em 0;">✅ Modern browser (universal support in 2025!)</li>
+<li style="margin:0.5em 0;">✅ Separate JavaScript file for the worker</li>
+</ul>
+
+<p><strong>Register a service worker (in your main JavaScript):</strong></p>
+
+<pre><code>// Modern async/await syntax
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(function(registration) {
-      console.log('Service Worker registered!');
-    });
+  try {
+    const registration = await navigator.serviceWorker.register('/sw.js');
+    console.log('✅ Service Worker registered!', registration);
+  } catch (err) {
+    console.error('❌ Registration failed:', err);
+  }
 }</code></pre>
 
-<p>In your <code>sw.js</code> file:</p>
+<p><strong>In your <code>sw.js</code> file - Modern approach with versioning:</strong></p>
 
-<pre><code>// Cache resources when installed
-self.addEventListener('install', function(event) {
+<pre><code>const CACHE_VERSION = 'unicorn-v1.0.0';
+const CACHE_ASSETS = [
+  '/',
+  '/index.html',
+  '/unicorn-style.css',
+  '/script.js',
+  '/images/unicorn.png'
+];
+
+// Install - Cache assets
+self.addEventListener('install', event =&gt; {
   event.waitUntil(
-    caches.open('unicorn-cache-v1').then(function(cache) {
-      return cache.addAll([
-        '/',
-        '/styles.css',
-        '/script.js',
-        '/unicorn.png'
-      ]);
-    })
+    caches.open(CACHE_VERSION)
+      .then(cache =&gt; cache.addAll(CACHE_ASSETS))
+      .then(() =&gt; self.skipWaiting())
   );
 });
 
-// Serve from cache when offline
-self.addEventListener('fetch', function(event) {
+// Activate - Clean old caches
+self.addEventListener('activate', event =&gt; {
+  event.waitUntil(
+    caches.keys().then(cacheNames =&gt; {
+      return Promise.all(
+        cacheNames.map(cache =&gt; {
+          if (cache !== CACHE_VERSION) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    }).then(() =&gt; self.clients.claim())
+  );
+});
+
+// Fetch - Cache-first strategy
+self.addEventListener('fetch', event =&gt; {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(cached =&gt; cached || fetch(event.request))
+      .catch(() =&gt; caches.match('/offline.html'))
   );
 });</code></pre>
 
-<h2>🗂️ Application Cache (Deprecated but Worth Knowing)</h2>
+<h2>🗂️ Application Cache - REMOVED!</h2>
 
-<p>The old way was AppCache (now deprecated), but you might see it in legacy code:</p>
+<p>⚠️ <strong>Important 2025 Update:</strong> AppCache has been completely removed from modern browsers!</p>
 
-<pre><code>&lt;html manifest="cache.manifest"&gt;</code></pre>
+<p>The old way used to be:</p>
+<pre><code>&lt;html manifest="cache.manifest"&gt; &lt;!-- DON'T USE THIS! --&gt;</code></pre>
 
-<p>The manifest file would list resources to cache. But Service Workers are much more powerful and flexible!</p>
-
-<h2>💪 What You Can Do Offline</h2>
-
+<p>❌ <strong>AppCache is dead:</strong></p>
 <ul style="list-style:disc;padding-left:2em;">
-<li style="margin:0.5em 0;">Display previously loaded content</li>
-<li style="margin:0.5em 0;">Let users create and edit content (save locally)</li>
-<li style="margin:0.5em 0;">Queue actions to sync when back online</li>
-<li style="margin:0.5em 0;">Provide a custom offline page instead of browser errors</li>
+<li style="margin:0.5em 0;">Removed from Chrome, Firefox, Safari, Edge</li>
+<li style="margin:0.5em 0;">Was too limited and confusing to use</li>
+<li style="margin:0.5em 0;">Service Workers are infinitely better!</li>
 </ul>
 
-<h2>🔄 Background Sync</h2>
+<p>✅ <strong>Use Service Workers instead</strong> - they're more powerful, flexible, and actually supported!</p>
 
-<p>Even cooler: Background Sync lets you defer actions until connectivity returns!</p>
+<h2>💪 Caching Strategies in 2025</h2>
 
-<pre><code>// Request a sync when connection is back
-navigator.serviceWorker.ready.then(function(registration) {
-  return registration.sync.register('sync-unicorn-data');
+<p>Different strategies for different content types:</p>
+
+<h3>1. Cache-First (for static assets)</h3>
+<pre><code>// Perfect for CSS, JS, images that rarely change
+caches.match(request) || fetch(request)</code></pre>
+
+<h3>2. Network-First (for dynamic content)</h3>
+<pre><code>// Try network, fall back to cache
+fetch(request).catch(() =&gt; caches.match(request))</code></pre>
+
+<h3>3. Stale-While-Revalidate (best of both)</h3>
+<pre><code>// Serve cache immediately, update in background
+const cached = await caches.match(request);
+const fetchPromise = fetch(request).then(response =&gt; {
+  cache.put(request, response.clone());
+  return response;
+});
+return cached || fetchPromise;</code></pre>
+
+<h3>4. Network-Only (for real-time data)</h3>
+<pre><code>// Always fetch fresh (analytics, APIs)
+fetch(request)</code></pre>
+
+<p>💡 <strong>Pro tip:</strong> Use different strategies for different URL patterns!</p>
+
+<h2>🔄 Background Sync (Modern API)</h2>
+
+<p>Background Sync lets you defer actions until connectivity returns - perfect for offline form submissions!</p>
+
+<p><strong>In your app:</strong></p>
+<pre><code>// Request a background sync
+async function saveOfflineData(data) {
+  // Save data to IndexedDB first
+  await saveToIndexedDB(data);
+  
+  // Request sync when online
+  const registration = await navigator.serviceWorker.ready;
+  await registration.sync.register('sync-unicorn-data');
+}</code></pre>
+
+<p><strong>In your service worker:</strong></p>
+<pre><code>self.addEventListener('sync', event =&gt; {
+  if (event.tag === 'sync-unicorn-data') {
+    event.waitUntil(syncOfflineData());
+  }
 });
 
-// In service worker - handle the sync
-self.addEventListener('sync', function(event) {
-  if (event.tag === 'sync-unicorn-data') {
-    event.waitUntil(syncData());
-  }
-});</code></pre>
+async function syncOfflineData() {
+  const data = await getFromIndexedDB();
+  await fetch('/api/sync', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+  await clearIndexedDB();
+}</code></pre>
 
-<h2>📱 Progressive Web Apps (PWAs)</h2>
+<p>⚡ <strong>Browser Support (2025):</strong> Chrome, Edge, Samsung Internet. Safari/Firefox working on it!</p>
 
-<p>Combine offline capabilities with other features to create a full PWA:</p>
+<h2>📱 Progressive Web Apps (PWAs) in 2025</h2>
 
+<p>PWAs are fully installable web apps that work offline and feel like native apps!</p>
+
+<p><strong>PWA Requirements:</strong></p>
 <ul style="list-style:disc;padding-left:2em;">
-<li style="margin:0.5em 0;">Service Worker for offline functionality</li>
-<li style="margin:0.5em 0;">Web App Manifest for "install to home screen"</li>
-<li style="margin:0.5em 0;">HTTPS for security</li>
-<li style="margin:0.5em 0;">Responsive design</li>
+<li style="margin:0.5em 0;">✅ HTTPS</li>
+<li style="margin:0.5em 0;">✅ Service Worker</li>
+<li style="margin:0.5em 0;">✅ Web App Manifest</li>
+<li style="margin:0.5em 0;">✅ Responsive design</li>
+<li style="margin:0.5em 0;">✅ Fast loading performance</li>
 </ul>
 
-<pre><code>// manifest.json
-{
+<p><strong>Web App Manifest (<code>manifest.json</code>):</strong></p>
+<pre><code>{
   "name": "Unicorn Magic App",
   "short_name": "UnicornApp",
+  "description": "A magical unicorn experience",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#9b59b6",
   "theme_color": "#ff69b4",
-  "icons": [{
-    "src": "/icon-192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  }]
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }</code></pre>
+
+<p><strong>Link it in your HTML:</strong></p>
+<pre><code>&lt;link rel="manifest" href="/manifest.json"&gt;
+&lt;meta name="theme-color" content="#ff69b4"&gt;</code></pre>
+
+<p>🎉 <strong>2025 PWA Features:</strong></p>
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">Install to home screen (all platforms!)</li>
+<li style="margin:0.5em 0;">Push notifications</li>
+<li style="margin:0.5em 0;">Background sync</li>
+<li style="margin:0.5em 0;">Offline functionality</li>
+<li style="margin:0.5em 0;">App store distribution (Windows, ChromeOS, Android)</li>
+</ul>
 
 <blockquote>
 <p>"The web used to require an internet connection like unicorns require rainbows. Now we can make magic happen anywhere!"</p>
@@ -122,10 +220,17 @@ self.addEventListener('sync', function(event) {
 <p><a href="forms.html">Continue to Chapter 10: Enchanted Forms →</a></p>
 
 <div class="pf">
-<h4>🌐 Offline Resources 🌐</h4>
+<h4>🌐 2025 Offline Resources 🌐</h4>
 <div class="moneybags">
-<p>Service Workers are powerful but require HTTPS (except on localhost). They're well worth learning for modern web development!</p>
-<p style="margin-top:1em;">Check out <a href="https://developers.google.com/web/fundamentals/primers/service-workers" target="_blank">Google's Service Worker guide</a> for more details!</p>
+<p><strong>Service Workers are the only way!</strong> AppCache was removed from all browsers. Service Workers require HTTPS (works on localhost for testing).</p>
+<p style="margin-top:1em;"><strong>Essential Resources:</strong></p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li><a href="https://web.dev/learn/pwa/" target="_blank" style="color:#9b59b6;font-weight:bold;">web.dev PWA Course</a> - Comprehensive 2025 guide</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" style="color:#9b59b6;font-weight:bold;">MDN Service Worker API</a> - Complete reference</li>
+<li><a href="https://workboxjs.org/" target="_blank" style="color:#9b59b6;font-weight:bold;">Workbox</a> - Google's library to simplify Service Workers</li>
+</ul>
+<p style="margin-top:1em;"><strong>Testing:</strong> Chrome DevTools has excellent Service Worker debugging. Use Application tab → Service Workers to inspect, update, and test offline mode!</p>
+<p style="margin-top:1em;">⚡ <strong>Quick Start:</strong> Use Workbox to avoid writing Service Worker code from scratch. It handles caching strategies, versioning, and updates automatically!</p>
 </div>
 </div>
 
