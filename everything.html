@@ -84,49 +84,90 @@ th { background: linear-gradient(135deg, #667eea, #764ba2) !important; }
 <tr><td>New Elements</td><td><code>!!document.createElement('article').toString</code></td></tr>
 </table>
 
+<h2>🔌 WebSockets Detection</h2>
+<table>
+<tr><th>Feature</th><th>Detection Code</th></tr>
+<tr><td>WebSocket</td><td><code>'WebSocket' in window</code></td></tr>
+<tr><td>WebSocket Binary</td><td><code>new WebSocket('ws://').binaryType !== undefined</code></td></tr>
+</table>
+
+<h2>🎯 Drag & Drop Detection</h2>
+<table>
+<tr><th>Feature</th><th>Detection Code</th></tr>
+<tr><td>Drag and Drop</td><td><code>'draggable' in document.createElement('div')</code></td></tr>
+<tr><td>DataTransfer</td><td><code>'DataTransfer' in window</code></td></tr>
+</table>
+
+<h2>🔔 Notifications Detection</h2>
+<table>
+<tr><th>Feature</th><th>Detection Code</th></tr>
+<tr><td>Web Notifications</td><td><code>'Notification' in window</code></td></tr>
+<tr><td>Push API</td><td><code>'PushManager' in window</code></td></tr>
+<tr><td>Permission Status</td><td><code>Notification.permission</code></td></tr>
+</table>
+
+<h2>📡 Fetch API Detection</h2>
+<table>
+<tr><th>Feature</th><th>Detection Code</th></tr>
+<tr><td>Fetch API</td><td><code>'fetch' in window</code></td></tr>
+<tr><td>AbortController</td><td><code>'AbortController' in window</code></td></tr>
+</table>
+
+<h2>🎮 WebGL Detection</h2>
+<table>
+<tr><th>Feature</th><th>Detection Code</th></tr>
+<tr><td>WebGL 1.0</td><td><code>!!canvas.getContext('webgl')</code></td></tr>
+<tr><td>WebGL 2.0</td><td><code>!!canvas.getContext('webgl2')</code></td></tr>
+</table>
+
 <h2>🔧 Miscellaneous Detection</h2>
 <table>
 <tr><th>Feature</th><th>Detection Code</th></tr>
-<tr><td>Drag and Drop</td><td><code>'draggable' in document.createElement('span')</code></td></tr>
-<tr><td>File API</td><td><code>!!(window.File && window.FileReader)</code></td></tr>
-<tr><td>History API</td><td><code>!!(window.history && history.pushState)</code></td></tr>
-<tr><td>WebSockets</td><td><code>'WebSocket' in window</code></td></tr>
-<tr><td>SVG</td><td><code>!!document.createElementNS</code></td></tr>
-<tr><td>MathML</td><td><code>document.createElement('math').toString()</code></td></tr>
+<tr><td>File API</td><td><code>'File' in window && 'FileReader' in window</code></td></tr>
+<tr><td>History API</td><td><code>'history' in window && 'pushState' in history</code></td></tr>
+<tr><td>SVG</td><td><code>'createElementNS' in document</code></td></tr>
+<tr><td>Permissions API</td><td><code>'permissions' in navigator</code></td></tr>
 </table>
 
-<h2>✨ Using Modernizr</h2>
+<h2>✨ Modern Feature Detection (2025)</h2>
 
-<p>The easiest way to detect features is with <strong>Modernizr</strong>:</p>
+<p><strong>No libraries needed!</strong> In 2025, use native JavaScript for feature detection:</p>
 
-<pre><code>&lt;script src="modernizr.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-if (Modernizr.canvas) {
-  // Use canvas!
-}
-
-if (Modernizr.localstorage) {
-  // Use localStorage!
-}
-
-if (Modernizr.geolocation) {
+<pre><code>// Modern approach - clean and simple
+if ('geolocation' in navigator) {
   // Use geolocation!
 }
-&lt;/script&gt;</code></pre>
 
-<h2>🎯 Feature Detection Best Practices</h2>
+if ('serviceWorker' in navigator) {
+  // Register service worker!
+}
+
+if ('Notification' in window) {
+  // Show notifications!
+}
+
+// Check permissions
+const permission = await navigator.permissions.query({ name: 'geolocation' });
+if (permission.state === 'granted') {
+  // Permission granted!
+}</code></pre>
+
+<p><strong>⚠️ Modernizr is no longer recommended</strong> — Modern browsers support all these features natively. Use simple JavaScript checks instead!</p>
+
+<h2>🎯 Feature Detection Best Practices (2025)</h2>
 
 <ol style="list-style:decimal;padding-left:2em;">
-<li style="margin:1em 0;"><strong>Detect features, not browsers</strong> — Never rely on user agent strings!</li>
-<li style="margin:1em 0;"><strong>Use established libraries</strong> like Modernizr when possible</li>
-<li style="margin:1em 0;"><strong>Provide fallbacks</strong> for unsupported features</li>
-<li style="margin:1em 0;"><strong>Test in real browsers</strong> — detection isn't perfect</li>
-<li style="margin:1em 0;"><strong>Progressive enhancement</strong> — start with basic functionality, enhance for capable browsers</li>
+<li style="margin:1em 0;"><strong>Use native JavaScript</strong> — No libraries needed in 2025!</li>
+<li style="margin:1em 0;"><strong>Check the 'in' operator</strong> — e.g., <code>'serviceWorker' in navigator</code></li>
+<li style="margin:1em 0;"><strong>Use Permissions API</strong> — Check permission state before using features</li>
+<li style="margin:1em 0;"><strong>Provide fallbacks</strong> — Gracefully handle unsupported features</li>
+<li style="margin:1em 0;"><strong>Progressive enhancement</strong> — Start basic, enhance for capable browsers</li>
+<li style="margin:1em 0;"><strong>Test on real devices</strong> — Especially mobile browsers</li>
 </ol>
 
 <blockquote>
-<p>"The mark of a great web wizard is not avoiding unsupported features, but handling them gracefully!"</p>
-<cite>— The Compatibility Grimoire</cite>
+<p>"Modern browsers support everything! Focus on user experience, not browser detection."</p>
+<cite>— The 2025 Web Standards Council</cite>
 </blockquote>
 
 <p class="a">🌟 ✨ 🌈</p>
@@ -134,14 +175,15 @@ if (Modernizr.geolocation) {
 <p><a href="peeks-pokes-and-pointers.html">Continue to Appendix B: Unicorn Wisdom →</a></p>
 
 <div class="pf">
-<h4>🔍 Detection Resources 🔍</h4>
+<h4>🔍 2025 Detection Resources 🔍</h4>
 <div class="moneybags">
 <p>For the most up-to-date browser compatibility information, check:</p>
 <ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
-<li><a href="https://caniuse.com" target="_blank">Can I Use</a> — Comprehensive compatibility tables</li>
-<li><a href="https://modernizr.com" target="_blank">Modernizr</a> — Feature detection library</li>
-<li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a> — Documentation with compatibility info</li>
+<li><a href="https://caniuse.com" target="_blank" style="color:#9b59b6;font-weight:bold;">Can I Use</a> — Comprehensive compatibility tables</li>
+<li><a href="https://developer.mozilla.org" target="_blank" style="color:#9b59b6;font-weight:bold;">MDN Web Docs</a> — Documentation with compatibility info</li>
+<li><a href="https://web.dev" target="_blank" style="color:#9b59b6;font-weight:bold;">Web.dev</a> — Modern web development guidance</li>
 </ul>
+<p style="margin-top:1em;"><strong>Note:</strong> Modernizr is no longer necessary for most projects. Modern browsers (Chrome, Firefox, Safari, Edge) all support HTML5 features natively!</p>
 </div>
 </div>
 
