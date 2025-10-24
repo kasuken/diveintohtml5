@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Fetch API - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+<style>
+h1:before{content:"Data Magic: "}
+</style>
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1><br>Modern Data Retrieval</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">T</span>he Fetch API is the modern way to make HTTP requests in JavaScript — it's like sending magical carrier unicorns to fetch data from distant realms! It replaces the old XMLHttpRequest with a cleaner, Promise-based interface that works beautifully with modern async/await syntax.</p>
+
+<h2>🚀 Basic Fetch (2025 Style)</h2>
+
+<pre><code>// Simple GET request
+const response = await fetch('https://api.unicorn.example/magic');
+const data = await response.json();
+console.log(data);
+
+// With error handling
+try {
+  const response = await fetch('https://api.unicorn.example/rainbows');
+  
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  
+  const data = await response.json();
+  console.log('✅ Data received:', data);
+} catch (error) {
+  console.error('❌ Fetch failed:', error);
+}</code></pre>
+
+<h2>📤 HTTP Methods</h2>
+
+<h3>GET Request (Default)</h3>
+<pre><code>// Fetch data
+const response = await fetch('/api/unicorns');
+const unicorns = await response.json();</code></pre>
+
+<h3>POST Request</h3>
+<pre><code>// Create new unicorn
+const response = await fetch('/api/unicorns', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Sparkles',
+    color: 'rainbow',
+    power: 9000
+  })
+});
+
+const result = await response.json();
+console.log('Created:', result);</code></pre>
+
+<h3>PUT Request</h3>
+<pre><code>// Update unicorn
+const response = await fetch('/api/unicorns/123', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Sparkles',
+    power: 9500 // Power increased!
+  })
+});
+
+const updated = await response.json();</code></pre>
+
+<h3>PATCH Request</h3>
+<pre><code>// Partial update
+const response = await fetch('/api/unicorns/123', {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    power: 9500 // Only update power
+  })
+});</code></pre>
+
+<h3>DELETE Request</h3>
+<pre><code>// Delete unicorn
+const response = await fetch('/api/unicorns/123', {
+  method: 'DELETE'
+});
+
+if (response.ok) {
+  console.log('✅ Deleted successfully');
+}</code></pre>
+
+<h2>📋 Request Options</h2>
+
+<pre><code>const response = await fetch('/api/data', {
+  // HTTP method
+  method: 'POST',
+  
+  // Request headers
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_TOKEN',
+    'X-Custom-Header': 'value'
+  },
+  
+  // Request body (various formats)
+  body: JSON.stringify({ key: 'value' }), // JSON
+  // body: 'key=value&foo=bar',            // URL-encoded
+  // body: formData,                        // FormData
+  // body: blob,                            // Blob/File
+  
+  // Credentials (cookies)
+  credentials: 'same-origin', // or 'include', 'omit'
+  
+  // Cache control
+  cache: 'default', // or 'no-cache', 'reload', 'force-cache', 'only-if-cached'
+  
+  // Redirect behavior
+  redirect: 'follow', // or 'error', 'manual'
+  
+  // Referrer
+  referrer: 'about:client',
+  
+  // Referrer policy
+  referrerPolicy: 'no-referrer',
+  
+  // CORS mode
+  mode: 'cors', // or 'no-cors', 'same-origin'
+  
+  // Signal for aborting
+  signal: abortController.signal
+});</code></pre>
+
+<h2>📊 Response Methods</h2>
+
+<pre><code>const response = await fetch('/api/unicorn');
+
+// Parse as JSON
+const json = await response.json();
+
+// Parse as text
+const text = await response.text();
+
+// Parse as Blob (images, files)
+const blob = await response.blob();
+const imageUrl = URL.createObjectURL(blob);
+
+// Parse as ArrayBuffer (binary data)
+const buffer = await response.arrayBuffer();
+
+// Parse as FormData
+const formData = await response.formData();
+
+// Clone response (can only read once!)
+const clone = response.clone();
+
+// Check response status
+console.log(response.ok);        // true if 200-299
+console.log(response.status);    // 200, 404, 500, etc.
+console.log(response.statusText); // "OK", "Not Found", etc.
+
+// Access headers
+console.log(response.headers.get('Content-Type'));
+console.log(response.headers.get('X-Custom-Header'));
+
+// Check if redirected
+console.log(response.redirected);
+
+// Get final URL
+console.log(response.url);</code></pre>
+
+<h2>🎯 Practical Examples</h2>
+
+<h3>API Wrapper Class</h3>
+<pre><code>class UnicornAPI {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
+    this.token = localStorage.getItem('auth_token');
+  }
+  
+  async request(endpoint, options = {}) {
+    const url = `${this.baseURL}${endpoint}`;
+    
+    const config = {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+      }
+    };
+    
+    // Add auth token if available
+    if (this.token) {
+      config.headers['Authorization'] = `Bearer ${this.token}`;
+    }
+    
+    try {
+      const response = await fetch(url, config);
+      
+      // Handle HTTP errors
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || `HTTP ${response.status}`);
+      }
+      
+      // Return parsed JSON
+      return await response.json();
+      
+    } catch (error) {
+      console.error('API Error:', error);
+      throw error;
+    }
+  }
+  
+  // GET request
+  async get(endpoint) {
+    return this.request(endpoint);
+  }
+  
+  // POST request
+  async post(endpoint, data) {
+    return this.request(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+  
+  // PUT request
+  async put(endpoint, data) {
+    return this.request(endpoint, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+  }
+  
+  // DELETE request
+  async delete(endpoint) {
+    return this.request(endpoint, {
+      method: 'DELETE'
+    });
+  }
+}
+
+// Usage
+const api = new UnicornAPI('https://api.unicorn.example');
+
+// Get all unicorns
+const unicorns = await api.get('/unicorns');
+
+// Create new unicorn
+const newUnicorn = await api.post('/unicorns', {
+  name: 'Sparkles',
+  power: 9000
+});
+
+// Update unicorn
+const updated = await api.put('/unicorns/123', {
+  power: 9500
+});
+
+// Delete unicorn
+await api.delete('/unicorns/123');</code></pre>
+
+<h3>Image Upload with Progress</h3>
+<pre><code>async function uploadImage(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('description', 'Magical unicorn photo');
+  
+  try {
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData
+      // Don't set Content-Type header - browser sets it with boundary
+    });
+    
+    if (!response.ok) {
+      throw new Error('Upload failed');
+    }
+    
+    const result = await response.json();
+    console.log('✅ Uploaded:', result.url);
+    return result;
+    
+  } catch (error) {
+    console.error('❌ Upload error:', error);
+    throw error;
+  }
+}
+
+// With input element
+document.getElementById('fileInput').onchange = async (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    await uploadImage(file);
+  }
+};</code></pre>
+
+<h3>Download File</h3>
+<pre><code>async function downloadFile(url, filename) {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    
+    // Create download link
+    const downloadUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Clean up
+    URL.revokeObjectURL(downloadUrl);
+    
+  } catch (error) {
+    console.error('Download failed:', error);
+  }
+}
+
+// Usage
+await downloadFile('/api/reports/123.pdf', 'unicorn-report.pdf');</code></pre>
+
+<h2>⏱️ Request Timeout & Abort</h2>
+
+<pre><code>// Create abort controller
+const controller = new AbortController();
+const signal = controller.signal;
+
+// Set timeout
+const timeoutId = setTimeout(() => {
+  controller.abort();
+}, 5000); // 5 second timeout
+
+try {
+  const response = await fetch('/api/slow-endpoint', { signal });
+  clearTimeout(timeoutId);
+  
+  const data = await response.json();
+  console.log('Data:', data);
+  
+} catch (error) {
+  if (error.name === 'AbortError') {
+    console.log('⏱️ Request timed out');
+  } else {
+    console.error('❌ Error:', error);
+  }
+}
+
+// Reusable timeout wrapper
+async function fetchWithTimeout(url, options = {}, timeout = 5000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    clearTimeout(id);
+    return response;
+  } catch (error) {
+    clearTimeout(id);
+    throw error;
+  }
+}
+
+// Usage
+const response = await fetchWithTimeout('/api/data', {}, 3000);</code></pre>
+
+<h2>🔄 Retry Logic</h2>
+
+<pre><code>async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await fetch(url, options);
+      
+      if (response.ok) {
+        return response;
+      }
+      
+      // Don't retry client errors (4xx)
+      if (response.status >= 400 && response.status < 500) {
+        throw new Error(`Client error: ${response.status}`);
+      }
+      
+      // Retry on server errors (5xx)
+      console.log(`Attempt ${i + 1} failed, retrying...`);
+      
+    } catch (error) {
+      if (i === maxRetries - 1) {
+        throw error;
+      }
+      
+      // Exponential backoff
+      const delay = Math.min(1000 * Math.pow(2, i), 10000);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+}
+
+// Usage
+try {
+  const response = await fetchWithRetry('/api/unreliable');
+  const data = await response.json();
+} catch (error) {
+  console.error('All retries failed:', error);
+}</code></pre>
+
+<h2>📡 Parallel Requests</h2>
+
+<pre><code>// Fetch multiple resources in parallel
+async function loadDashboardData() {
+  try {
+    const [unicorns, rainbows, sparkles] = await Promise.all([
+      fetch('/api/unicorns').then(r => r.json()),
+      fetch('/api/rainbows').then(r => r.json()),
+      fetch('/api/sparkles').then(r => r.json())
+    ]);
+    
+    return { unicorns, rainbows, sparkles };
+    
+  } catch (error) {
+    console.error('Failed to load dashboard:', error);
+  }
+}
+
+// Load data
+const data = await loadDashboardData();
+
+// With Promise.allSettled (doesn't fail if one fails)
+const results = await Promise.allSettled([
+  fetch('/api/unicorns').then(r => r.json()),
+  fetch('/api/rainbows').then(r => r.json()),
+  fetch('/api/sparkles').then(r => r.json())
+]);
+
+results.forEach((result, index) => {
+  if (result.status === 'fulfilled') {
+    console.log(`Request ${index} succeeded:`, result.value);
+  } else {
+    console.error(`Request ${index} failed:`, result.reason);
+  }
+});</code></pre>
+
+<h2>🔐 Authentication Examples</h2>
+
+<h3>Bearer Token</h3>
+<pre><code>const response = await fetch('/api/protected', {
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+});</code></pre>
+
+<h3>Basic Auth</h3>
+<pre><code>const credentials = btoa(`${username}:${password}`);
+const response = await fetch('/api/protected', {
+  headers: {
+    'Authorization': `Basic ${credentials}`
+  }
+});</code></pre>
+
+<h3>Cookies (Credentials)</h3>
+<pre><code>// Send cookies with request
+const response = await fetch('/api/protected', {
+  credentials: 'include' // or 'same-origin'
+});</code></pre>
+
+<h2>💡 2025 Best Practices</h2>
+
+<ol style="list-style:decimal;padding-left:2em;">
+<li style="margin:1em 0;"><strong>Always check response.ok</strong> — Fetch doesn't reject on HTTP errors!</li>
+<li style="margin:1em 0;"><strong>Use async/await</strong> — Much cleaner than .then() chains</li>
+<li style="margin:1em 0;"><strong>Handle errors properly</strong> — Network errors, parsing errors, HTTP errors</li>
+<li style="margin:1em 0;"><strong>Set timeouts</strong> — Don't let requests hang forever</li>
+<li style="margin:1em 0;"><strong>Implement retry logic</strong> — For unreliable connections</li>
+<li style="margin:1em 0;"><strong>Use AbortController</strong> — Cancel requests when component unmounts</li>
+<li style="margin:1em 0;"><strong>Cache responses</strong> — Reduce server load and improve speed</li>
+<li style="margin:1em 0;"><strong>Monitor performance</strong> — Use Performance API to track requests</li>
+</ol>
+
+<h3>Error Handling Template</h3>
+<pre><code>async function robustFetch(url, options = {}) {
+  try {
+    const response = await fetch(url, options);
+    
+    // Check HTTP status
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.message || `HTTP ${response.status}: ${response.statusText}`
+      );
+    }
+    
+    // Parse response
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    // Network error
+    if (error instanceof TypeError) {
+      console.error('Network error:', error);
+      throw new Error('Network connection failed');
+    }
+    
+    // Abort error
+    if (error.name === 'AbortError') {
+      console.log('Request cancelled');
+      throw error;
+    }
+    
+    // Other errors
+    console.error('Fetch error:', error);
+    throw error;
+  }
+}</code></pre>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="webgl.html">Continue to WebGL: 3D Unicorn Graphics →</a></p>
+
+<div class="pf">
+<h4>📡 2025 Fetch Wisdom 📡</h4>
+<div class="moneybags">
+<p><strong>Universal Support:</strong> Fetch API works in all modern browsers. It completely replaces XMLHttpRequest!</p>
+<p style="margin-top:1em;"><strong>Key Differences from XMLHttpRequest:</strong></p>
+<ul style="list-style:disc;padding-left:2em;margin-top:0.5em;">
+<li>✅ Promise-based (works with async/await)</li>
+<li>✅ Cleaner, more intuitive API</li>
+<li>✅ Better CORS handling</li>
+<li>✅ Streaming response bodies</li>
+<li>⚠️ Doesn't reject on HTTP errors (check response.ok!)</li>
+<li>⚠️ No built-in progress events (use streams)</li>
+</ul>
+<p style="margin-top:1em;"><strong>Libraries:</strong> For complex needs, consider axios or ky (fetch wrappers with extra features)</p>
+<p style="margin-top:1em;">📚 <strong>Resources:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" style="color:#9b59b6;font-weight:bold;">MDN Fetch API</a></p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Modern web standards • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+
+</body>
+</html>

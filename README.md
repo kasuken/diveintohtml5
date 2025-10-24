@@ -14,24 +14,35 @@ This is a complete website clone of "Dive Into HTML5" (https://diveintohtml5.inf
 
 ## 📚 Pages Included
 
-All pages from the original site have been recreated:
+All pages from the original site have been recreated and **modernized for 2025**:
 
-1. **index.html** - Home page with table of contents
+### Core HTML5 Features (Updated)
+1. **index.html** - Home page with complete table of contents
 2. **introduction.html** - Five Magical Truths
 3. **past.html** - Ancient Unicorn Legends (History of HTML5)
-4. **detect.html** - Unicorn Detection Spells (Feature Detection)
+4. **detect.html** - Unicorn Detection Spells (Feature Detection - Modern, no Modernizr!)
 5. **semantics.html** - The Language of Unicorns (Semantic Elements)
-6. **canvas.html** - Rainbow Drawing Magic (Canvas API)
-7. **video.html** - Moving Pictures from the Unicorn Realm (Video/Audio)
-8. **geolocation.html** - Where the Unicorns Are (Geolocation API)
-9. **storage.html** - The Unicorn's Treasure Chest (Web Storage)
-10. **offline.html** - Unicorn Magic That Works Offline (Offline Apps)
-11. **forms.html** - Enchanted Forms (HTML5 Forms)
+6. **canvas.html** - Rainbow Drawing Magic (Canvas API with 2025 best practices)
+7. **video.html** - Moving Pictures from the Unicorn Realm (Video/Audio - modern codecs)
+8. **geolocation.html** - Where the Unicorns Are (Geolocation API with Permissions API)
+9. **storage.html** - The Unicorn's Treasure Chest (Web Storage + IndexedDB)
+10. **offline.html** - Unicorn Magic That Works Offline (Service Workers & PWAs)
+11. **forms.html** - Enchanted Forms (HTML5 Forms with modern validation)
 12. **extensibility.html** - Advanced Unicorn Spells (Web Components, Microdata)
 13. **history.html** - Time-Traveling Unicorns (History API)
-14. **everything.html** - The Complete Unicorn Spellbook (Feature Detection Reference)
-15. **peeks-pokes-and-pointers.html** - Unicorn Wisdom (Tips & Resources)
-16. **about.html** - About This Magical Journey
+
+### 🆕 New Modern Web APIs (2025)
+14. **webworkers.html** - Multitasking Unicorns (Web Workers for background processing)
+15. **websockets.html** - Instant Unicorn Communication (WebSockets for real-time features)
+16. **dragdrop.html** - Moving Unicorns with Grace (Drag and Drop API)
+17. **notifications.html** - Magical Desktop Alerts (Web Notifications & Push)
+18. **fetch.html** - Modern Data Retrieval (Fetch API replaces XMLHttpRequest)
+19. **webgl.html** - Three-Dimensional Unicorn Realms (WebGL & 3D with Three.js)
+
+### Reference Pages
+20. **everything.html** - The Complete Unicorn Spellbook (Feature Detection Reference)
+21. **peeks-pokes-and-pointers.html** - Unicorn Wisdom (Tips & Resources)
+22. **about.html** - About This Magical Journey
 
 ## 🎨 Features
 
@@ -108,17 +119,36 @@ The unicorn theme, styling, and whimsical narrative elements are transformative 
 ## 💡 Learning Outcomes
 
 By exploring this magical journey, you'll learn:
-- HTML5 semantic elements
-- Canvas API for drawing
-- Video and Audio elements
-- Geolocation API
-- Web Storage (localStorage, sessionStorage)
-- Offline capabilities with Service Workers
-- HTML5 form enhancements
-- History API for SPAs
-- Feature detection techniques
-- Web Components and extensibility
-- Best practices for modern web development
+
+### Core HTML5 (Updated for 2025)
+- ✅ HTML5 semantic elements
+- ✅ Canvas API for 2D drawing (with HiDPI support)
+- ✅ Video and Audio elements (modern codecs)
+- ✅ Geolocation API (with Permissions API)
+- ✅ Web Storage (localStorage, sessionStorage, IndexedDB)
+- ✅ Service Workers & Progressive Web Apps (AppCache removed!)
+- ✅ HTML5 form enhancements (modern validation)
+- ✅ History API for SPAs
+- ✅ Feature detection (native, no libraries!)
+
+### 🆕 Modern Web APIs
+- ✅ **Web Workers** - Parallel processing without blocking UI
+- ✅ **WebSockets** - Real-time bidirectional communication
+- ✅ **Drag & Drop** - File uploads and interactive UIs
+- ✅ **Web Notifications** - Desktop alerts and push notifications
+- ✅ **Fetch API** - Modern HTTP requests (replaces XMLHttpRequest)
+- ✅ **WebGL & 3D** - Three-dimensional graphics with Three.js
+
+### Modern Development Practices
+- ✅ Async/await patterns
+- ✅ ES6+ JavaScript syntax
+- ✅ Promise-based APIs
+- ✅ Error handling best practices
+- ✅ Security & privacy considerations
+- ✅ Performance optimization
+- ✅ Accessibility guidelines
+- ✅ Mobile-first responsive design
+- ✅ Production-ready code examples
 
 ## 🎨 Color Palette
 
@@ -158,14 +188,31 @@ Unlike typical technical documentation:
 - **Whimsical metaphors** clarify complex ideas
 - **Memorable characters** (unicorns!) help retention
 
-## 🔮 Future Enhancements
+## 🔮 2025 Updates & New Features
 
-Potential additions:
-- More interactive demos
-- Quiz sections with unicorn rewards
-- Code playgrounds
-- Dark mode (unicorn night theme)
-- Additional chapters on newer web APIs
+This isn't just a theme makeover - the entire course has been modernized!
+
+### What's New:
+- ✅ **6 brand new chapters** on modern Web APIs (Workers, WebSockets, Fetch, etc.)
+- ✅ **Removed outdated content** (Modernizr, AppCache, IE polyfills)
+- ✅ **Modern JavaScript** (async/await, ES6+, const/let)
+- ✅ **2025 best practices** throughout all chapters
+- ✅ **Updated browser support** (IE is dead! 🎉)
+- ✅ **Security & privacy** guidelines
+- ✅ **Performance tips** for every feature
+- ✅ **Mobile-first** examples
+- ✅ **Production-ready** code samples
+
+### Key Changes:
+- **Feature Detection:** Native JavaScript, no Modernizr needed
+- **Offline Apps:** Service Workers only (AppCache removed from browsers)
+- **Video/Audio:** Modern codecs (H.265, AV1), autoplay policies
+- **Storage:** IndexedDB libraries, Storage Manager API
+- **Forms:** Modern validation API, accessibility focus
+- **Canvas:** HiDPI/Retina support, OffscreenCanvas
+- **All APIs:** Updated for universal modern browser support
+
+See `UPDATES-2025.md` and `NEW-PAGES-2025.md` for complete details!
 
 ## 🦄 Enjoy the Magic!
 
