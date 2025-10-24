@@ -1,0 +1,122 @@
+{
+  "introduction.html": {
+    "title": "Introduction to HTML5 - 5 Essential Truths Every Developer Must Know",
+    "description": "Learn the 5 fundamental truths about HTML5. Understand what HTML5 really is, browser support, and why it matters for modern web development.",
+    "keywords": "HTML5 introduction, what is HTML5, HTML5 basics, web standards, modern HTML",
+    "h1": "Introduction to HTML5: Five Essential Truths"
+  },
+  "past.html": {
+    "title": "History of HTML5 - From Browser Wars to Modern Web Standards",
+    "description": "Explore the fascinating history of HTML5 development, from early browser wars to modern web standards. Understand how HTML5 became what it is today.",
+    "keywords": "HTML5 history, web standards history, browser wars, HTML evolution, WHATWG, W3C",
+    "h1": "The History of HTML5 and Web Standards"
+  },
+  "detect.html": {
+    "title": "HTML5 Feature Detection - Modern JavaScript Methods (No Libraries Needed)",
+    "description": "Master HTML5 feature detection with modern JavaScript. Learn native detection methods without Modernizr. Includes code examples for all major features.",
+    "keywords": "HTML5 feature detection, JavaScript feature detection, Modernizr alternative, browser compatibility, progressive enhancement",
+    "h1": "HTML5 Feature Detection Guide 2025"
+  },
+  "semantics.html": {
+    "title": "HTML5 Semantic Elements - Complete Guide to Meaningful Markup",
+    "description": "Master HTML5 semantic elements like header, nav, article, section, and more. Improve SEO and accessibility with meaningful markup.",
+    "keywords": "HTML5 semantic elements, semantic HTML, HTML5 tags, SEO HTML, accessibility, article tag, section tag",
+    "h1": "HTML5 Semantic Elements Complete Guide"
+  },
+  "canvas.html": {
+    "title": "HTML5 Canvas Tutorial - 2D Graphics and Drawing with JavaScript",
+    "description": "Learn HTML5 Canvas API for 2D graphics. Complete tutorial with examples covering drawing, animations, HiDPI support, and modern best practices.",
+    "keywords": "HTML5 canvas, canvas tutorial, 2D graphics JavaScript, canvas API, drawing with JavaScript, canvas animation",
+    "h1": "HTML5 Canvas API Tutorial - 2D Graphics"
+  },
+  "video.html": {
+    "title": "HTML5 Video and Audio - Complete Guide to Native Media",
+    "description": "Master HTML5 video and audio elements. Learn about codecs, autoplay policies, Promise-based APIs, and modern media handling.",
+    "keywords": "HTML5 video, HTML5 audio, video codecs, H.264, WebM, native video, media elements",
+    "h1": "HTML5 Video and Audio Complete Guide"
+  },
+  "geolocation.html": {
+    "title": "HTML5 Geolocation API - Get User Location with JavaScript",
+    "description": "Learn the Geolocation API to get user location. Includes permission handling, accuracy options, and modern best practices for 2025.",
+    "keywords": "geolocation API, HTML5 geolocation, JavaScript location, get user location, GPS JavaScript, permissions API",
+    "h1": "HTML5 Geolocation API Tutorial"
+  },
+  "storage.html": {
+    "title": "Web Storage API - localStorage, sessionStorage, and IndexedDB Guide",
+    "description": "Master client-side storage with localStorage, sessionStorage, and IndexedDB. Learn modern patterns for storing data in the browser.",
+    "keywords": "web storage, localStorage, sessionStorage, IndexedDB, client-side storage, browser storage, offline data",
+    "h1": "Web Storage API Complete Guide"
+  },
+  "offline.html": {
+    "title": "Service Workers and PWAs - Build Offline-First Web Applications",
+    "description": "Learn Service Workers and Progressive Web Apps. Build offline-first applications with caching strategies and modern PWA features.",
+    "keywords": "service workers, PWA, progressive web apps, offline apps, web app manifest, caching strategies",
+    "h1": "Service Workers and Progressive Web Apps"
+  },
+  "forms.html": {
+    "title": "HTML5 Forms - Modern Input Types and Validation",
+    "description": "Master HTML5 form enhancements. Learn new input types, native validation, and accessibility best practices for modern web forms.",
+    "keywords": "HTML5 forms, form validation, input types, email input, date picker, form accessibility",
+    "h1": "HTML5 Forms Complete Guide"
+  },
+  "history.html": {
+    "title": "History API - Build Single Page Applications with pushState",
+    "description": "Master the History API for building SPAs. Learn pushState, replaceState, and modern client-side routing techniques.",
+    "keywords": "history API, pushState, single page application, SPA routing, replaceState, browser history",
+    "h1": "HTML5 History API Tutorial"
+  },
+  "webworkers.html": {
+    "title": "Web Workers API - Run JavaScript in Background Threads",
+    "description": "Learn Web Workers for parallel JavaScript processing. Keep your UI responsive with background threads. Includes practical examples.",
+    "keywords": "web workers, JavaScript threads, parallel processing, background JavaScript, worker API, multithreading",
+    "h1": "Web Workers API Complete Guide"
+  },
+  "websockets.html": {
+    "title": "WebSocket API - Real-Time Bidirectional Communication Tutorial",
+    "description": "Master WebSockets for real-time web apps. Build chat applications, live dashboards, and multiplayer games with instant communication.",
+    "keywords": "WebSocket, real-time communication, WebSocket tutorial, chat app, live updates, bidirectional communication",
+    "h1": "WebSocket API Tutorial - Real-Time Communication"
+  },
+  "dragdrop.html": {
+    "title": "HTML5 Drag and Drop API - Interactive File Uploads and Sortable Lists",
+    "description": "Master the Drag and Drop API. Build file upload interfaces, sortable lists, and interactive UIs with native HTML5 drag and drop.",
+    "keywords": "drag and drop, HTML5 drag drop, file upload, DataTransfer, sortable lists, interactive UI",
+    "h1": "HTML5 Drag and Drop API Complete Guide"
+  },
+  "notifications.html": {
+    "title": "Web Notifications API - Desktop Alerts and Push Notifications",
+    "description": "Learn Web Notifications and Push API. Send desktop alerts, handle permissions, and implement push notifications for user engagement.",
+    "keywords": "web notifications, push notifications, notification API, desktop alerts, push API, browser notifications",
+    "h1": "Web Notifications and Push API Tutorial"
+  },
+  "fetch.html": {
+    "title": "Fetch API - Modern HTTP Requests with JavaScript async/await",
+    "description": "Master the Fetch API for modern HTTP requests. Learn async/await patterns, error handling, and best practices for API communication.",
+    "keywords": "fetch API, HTTP requests, JavaScript fetch, async await, XMLHttpRequest alternative, REST API",
+    "h1": "Fetch API Complete Guide - Modern HTTP"
+  },
+  "webgl.html": {
+    "title": "WebGL and Three.js - 3D Graphics in the Browser Tutorial",
+    "description": "Learn WebGL and Three.js for 3D web graphics. Build interactive 3D experiences, games, and visualizations in the browser.",
+    "keywords": "WebGL, Three.js, 3D graphics, JavaScript 3D, WebGL tutorial, browser 3D, Babylon.js",
+    "h1": "WebGL and Three.js Tutorial - 3D Graphics"
+  },
+  "extensibility.html": {
+    "title": "Web Components and Custom Elements - Advanced HTML5 Features",
+    "description": "Master Web Components, Custom Elements, and microdata. Learn advanced extensibility features for modern web development.",
+    "keywords": "web components, custom elements, shadow DOM, HTML templates, microdata, extensibility",
+    "h1": "Web Components and Advanced Features"
+  },
+  "everything.html": {
+    "title": "HTML5 Feature Detection Reference - Complete API Detection Guide",
+    "description": "Complete reference for detecting all HTML5 and Web API features. Updated for 2025 with modern JavaScript detection methods.",
+    "keywords": "feature detection reference, HTML5 detection, API detection, browser support, compatibility check",
+    "h1": "Complete HTML5 Feature Detection Reference"
+  },
+  "peeks-pokes-and-pointers.html": {
+    "title": "Web Development Tips and Resources - HTML5 Learning Guide",
+    "description": "Essential tips, tricks, and resources for HTML5 and modern web development. Curated list of tools and learning materials.",
+    "keywords": "web development tips, HTML5 resources, learning resources, developer tools, coding tips",
+    "h1": "Web Development Tips and Resources"
+  }
+}
