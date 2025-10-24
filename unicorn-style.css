@@ -184,17 +184,7 @@ p {
   margin-top: 2em;
 }
 
-.f::first-letter {
-  font-size: 4em;
-  float: left;
-  line-height: 0.8;
-  margin: 0.1em 0.1em 0 0;
-  background: var(--sparkle-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: bold;
-}
+/* Drop cap styling is done inline with <span> elements */
 
 /* Decorative elements */
 .a {
