@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Offline Apps - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1>Unicorn Magic That Works Without Rainbows (Offline)</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">S</span>ometimes unicorns venture into places where rainbows don't reach — deep caves, ancient forests, or (gasp!) areas with no internet connection! Your web applications can work in these magical dead zones too, thanks to offline capabilities!</p>
+
+<h2>📡 Service Workers: The Modern Way</h2>
+
+<p>Service Workers are like magical helpers that intercept network requests and can serve cached content when offline:</p>
+
+<pre><code>// Register a service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(function(registration) {
+      console.log('Service Worker registered!');
+    });
+}</code></pre>
+
+<p>In your <code>sw.js</code> file:</p>
+
+<pre><code>// Cache resources when installed
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open('unicorn-cache-v1').then(function(cache) {
+      return cache.addAll([
+        '/',
+        '/styles.css',
+        '/script.js',
+        '/unicorn.png'
+      ]);
+    })
+  );
+});
+
+// Serve from cache when offline
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});</code></pre>
+
+<h2>🗂️ Application Cache (Deprecated but Worth Knowing)</h2>
+
+<p>The old way was AppCache (now deprecated), but you might see it in legacy code:</p>
+
+<pre><code>&lt;html manifest="cache.manifest"&gt;</code></pre>
+
+<p>The manifest file would list resources to cache. But Service Workers are much more powerful and flexible!</p>
+
+<h2>💪 What You Can Do Offline</h2>
+
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">Display previously loaded content</li>
+<li style="margin:0.5em 0;">Let users create and edit content (save locally)</li>
+<li style="margin:0.5em 0;">Queue actions to sync when back online</li>
+<li style="margin:0.5em 0;">Provide a custom offline page instead of browser errors</li>
+</ul>
+
+<h2>🔄 Background Sync</h2>
+
+<p>Even cooler: Background Sync lets you defer actions until connectivity returns!</p>
+
+<pre><code>// Request a sync when connection is back
+navigator.serviceWorker.ready.then(function(registration) {
+  return registration.sync.register('sync-unicorn-data');
+});
+
+// In service worker - handle the sync
+self.addEventListener('sync', function(event) {
+  if (event.tag === 'sync-unicorn-data') {
+    event.waitUntil(syncData());
+  }
+});</code></pre>
+
+<h2>📱 Progressive Web Apps (PWAs)</h2>
+
+<p>Combine offline capabilities with other features to create a full PWA:</p>
+
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;">Service Worker for offline functionality</li>
+<li style="margin:0.5em 0;">Web App Manifest for "install to home screen"</li>
+<li style="margin:0.5em 0;">HTTPS for security</li>
+<li style="margin:0.5em 0;">Responsive design</li>
+</ul>
+
+<pre><code>// manifest.json
+{
+  "name": "Unicorn Magic App",
+  "short_name": "UnicornApp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#9b59b6",
+  "theme_color": "#ff69b4",
+  "icons": [{
+    "src": "/icon-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }]
+}</code></pre>
+
+<blockquote>
+<p>"The web used to require an internet connection like unicorns require rainbows. Now we can make magic happen anywhere!"</p>
+<cite>— Offline Wizard Manifesto</cite>
+</blockquote>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="forms.html">Continue to Chapter 10: Enchanted Forms →</a></p>
+
+<div class="pf">
+<h4>🌐 Offline Resources 🌐</h4>
+<div class="moneybags">
+<p>Service Workers are powerful but require HTTPS (except on localhost). They're well worth learning for modern web development!</p>
+<p style="margin-top:1em;">Check out <a href="https://developers.google.com/web/fundamentals/primers/service-workers" target="_blank">Google's Service Worker guide</a> for more details!</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Original wisdom by <a href="about.html">Mark Pilgrim</a> • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+
+</body>
+</html>

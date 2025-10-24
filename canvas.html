@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Rainbow Drawing Magic - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+<style>
+h1:before{content:"Canvas Magic: "}
+#demo-canvas { 
+  border: 3px solid #9b59b6; 
+  border-radius: 15px; 
+  display: block; 
+  margin: 2em auto;
+  box-shadow: 0 5px 20px rgba(155,89,182,0.4);
+}
+</style>
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1><br>Let's Call It a Rainbow Drawing Surface</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">I</span>magine you have a magical piece of parchment where you can paint anything you can dream — rainbows, unicorns, sparkles, or even realistic portraits of your favorite mythical creatures. That's exactly what the <strong>canvas element</strong> gives you: a blank drawing surface that you control with JavaScript!</p>
+
+<h2>🎨 What Is Canvas?</h2>
+
+<p>The <code>&lt;canvas&gt;</code> element is an HTML tag that creates a rectangular area where you can draw using JavaScript. Unlike images which are static, canvas drawings are created programmatically, meaning you can generate them on the fly, animate them, and make them interactive!</p>
+
+<pre><code>&lt;canvas id="myCanvas" width="500" height="300"&gt;
+  Your browser doesn't support unicorn magic! 😢
+&lt;/canvas&gt;</code></pre>
+
+<p>The text inside the canvas element is fallback content for browsers that don't support canvas (like trying to show a rainbow to a color-blind dragon).</p>
+
+<h2>🖌️ Drawing Your First Unicorn... er, Rectangle</h2>
+
+<p>Let's start simple. Here's how to draw a rectangle filled with unicorn purple:</p>
+
+<pre><code>var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+// Fill with unicorn purple!
+ctx.fillStyle = '#9b59b6';
+ctx.fillRect(10, 10, 100, 50);</code></pre>
+
+<p>The <code>getContext('2d')</code> method returns a drawing context — think of it as your magical paintbrush and palette combined!</p>
+
+<h2>🌈 Drawing Rainbows (Well, Colorful Shapes)</h2>
+
+<p>Canvas can draw all sorts of shapes. Here are some examples:</p>
+
+<h3>Rectangles</h3>
+
+<pre><code>// Filled rectangle (solid)
+ctx.fillStyle = '#ff69b4';
+ctx.fillRect(x, y, width, height);
+
+// Stroked rectangle (outline only)
+ctx.strokeStyle = '#87ceeb';
+ctx.strokeRect(x, y, width, height);
+
+// Clear rectangle (erases)
+ctx.clearRect(x, y, width, height);</code></pre>
+
+<h3>Circles (Actually Arcs)</h3>
+
+<pre><code>ctx.beginPath();
+ctx.arc(x, y, radius, 0, 2 * Math.PI);
+ctx.fillStyle = '#ffd700';
+ctx.fill();</code></pre>
+
+<h3>Lines and Paths</h3>
+
+<pre><code>ctx.beginPath();
+ctx.moveTo(50, 50);  // Starting point
+ctx.lineTo(200, 100); // Draw line to here
+ctx.lineTo(100, 200); // And to here
+ctx.strokeStyle = '#9b59b6';
+ctx.lineWidth = 3;
+ctx.stroke();</code></pre>
+
+<h2>🦄 Interactive Demo</h2>
+
+<canvas id="demo-canvas" width="600" height="400"></canvas>
+
+<p style="text-align:center;margin-top:1em;"><button onclick="drawUnicornMagic()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;padding:1em 2em;border-radius:25px;font-size:1.1em;cursor:pointer;box-shadow:0 5px 15px rgba(155,89,182,0.4);">✨ Draw Unicorn Magic! ✨</button></p>
+
+<h2>🎭 Text on Canvas</h2>
+
+<p>You can also draw text on canvas, perfect for adding mystical inscriptions:</p>
+
+<pre><code>ctx.font = '30px Cinzel';
+ctx.fillStyle = '#9b59b6';
+ctx.fillText('Unicorn Magic!', 50, 50);
+
+// Or with an outline
+ctx.strokeStyle = '#ff69b4';
+ctx.strokeText('Sparkles!', 50, 100);</code></pre>
+
+<h2>🖼️ Images on Canvas</h2>
+
+<p>You can draw images onto the canvas, manipulate them, and even create filters:</p>
+
+<pre><code>var img = new Image();
+img.onload = function() {
+  ctx.drawImage(img, 0, 0);
+};
+img.src = 'unicorn.png';</code></pre>
+
+<h2>✨ Gradients and Patterns</h2>
+
+<p>Create beautiful rainbow gradients:</p>
+
+<pre><code>// Linear gradient
+var gradient = ctx.createLinearGradient(0, 0, 200, 0);
+gradient.addColorStop(0, '#9b59b6');
+gradient.addColorStop(0.5, '#ff69b4');
+gradient.addColorStop(1, '#87ceeb');
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 200, 100);
+
+// Radial gradient (like unicorn magic emanating)
+var radial = ctx.createRadialGradient(100, 100, 10, 100, 100, 100);
+radial.addColorStop(0, '#ffd700');
+radial.addColorStop(1, '#9b59b6');
+ctx.fillStyle = radial;
+ctx.fillRect(0, 0, 200, 200);</code></pre>
+
+<h2>🎬 Animation</h2>
+
+<p>The real magic happens when you animate! Use <code>requestAnimationFrame</code> for smooth, unicorn-approved animations:</p>
+
+<pre><code>function animate() {
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw something
+  ctx.fillStyle = '#ff69b4';
+  ctx.fillRect(x, y, 50, 50);
+  
+  // Update position
+  x += 2;
+  
+  // Loop
+  requestAnimationFrame(animate);
+}
+
+animate();</code></pre>
+
+<h2>💡 Canvas Best Practices</h2>
+
+<ol style="list-style: decimal; padding-left: 2em;">
+<li style="margin: 1em 0;"><strong>Always check for support</strong> before using canvas (as we learned in the detection chapter).</li>
+<li style="margin: 1em 0;"><strong>Use requestAnimationFrame</strong> for animations, not setTimeout or setInterval.</li>
+<li style="margin: 1em 0;"><strong>Clear before redrawing</strong> to avoid ghosting effects (unless you want trails of unicorn magic!).</li>
+<li style="margin: 1em 0;"><strong>Save and restore context</strong> when changing styles temporarily.</li>
+<li style="margin: 1em 0;"><strong>Consider performance</strong> — canvas can be slow if you're drawing too much!</li>
+</ol>
+
+<blockquote>
+<p>"Canvas is like a unicorn's imagination made real — limited only by your creativity and JavaScript skills."</p>
+<cite>— Master Canvas Wizard</cite>
+</blockquote>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="video.html">Continue to Chapter 6: Moving Pictures from the Unicorn Realm →</a></p>
+
+<div class="pf">
+<h4>🎨 Canvas Resources 🎨</h4>
+<div class="moneybags">
+<p>Canvas is incredibly powerful! We've only scratched the surface here. You can create games, data visualizations, image editors, and so much more.</p>
+<p style="margin-top:1em;">For more in-depth canvas tutorials, check out MDN's Canvas Tutorial, or for games specifically, look into libraries like Phaser or PixiJS. The original <em>Dive Into HTML5</em> chapter on canvas is also excellent and goes into more technical detail!</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Original wisdom by <a href="about.html">Mark Pilgrim</a> • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+<script>
+function drawUnicornMagic() {
+  var canvas = document.getElementById('demo-canvas');
+  if (!canvas.getContext) return;
+  
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Rainbow background gradient
+  var gradient = ctx.createLinearGradient(0, 0, 600, 400);
+  gradient.addColorStop(0, '#667eea');
+  gradient.addColorStop(0.5, '#764ba2');
+  gradient.addColorStop(1, '#f093fb');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 600, 400);
+  
+  // Draw stars
+  ctx.fillStyle = '#ffd700';
+  for (var i = 0; i < 20; i++) {
+    var x = Math.random() * 600;
+    var y = Math.random() * 400;
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+  
+  // Draw unicorn text
+  ctx.font = 'bold 48px Cinzel';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = 'rgba(255,105,180,0.8)';
+  ctx.shadowBlur = 20;
+  ctx.fillText('🦄 Unicorn Magic! 🦄', 300, 200);
+  
+  // Draw rainbow arc
+  var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+  for (var i = 0; i < colors.length; i++) {
+    ctx.beginPath();
+    ctx.arc(300, 400, 200 - i * 15, Math.PI, 0);
+    ctx.strokeStyle = colors[i];
+    ctx.lineWidth = 10;
+    ctx.stroke();
+  }
+}
+
+// Draw initial magic
+drawUnicornMagic();
+</script>
+
+</body>
+</html>

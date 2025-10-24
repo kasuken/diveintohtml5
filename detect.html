@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Unicorn Detection Spells - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+<style>
+h1:before{content:"Detection Magic: "}
+</style>
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1><br>Finding Magic in Every Browser</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">D</span>etecting unicorn magic in the wild is easier than you might think, my dear apprentice wizard! Unlike trying to spot an actual unicorn (which requires being pure of heart and offering the perfect apple), detecting browser capabilities is a matter of asking the right questions in JavaScript.</p>
+
+<h2>🔮 The Art of Feature Detection</h2>
+
+<p>In the old days, web developers would try to detect which browser someone was using and then guess what features it supported. This was about as reliable as guessing which way a unicorn would gallop. Instead, we use <strong>feature detection</strong> — we ask directly: "Can you do this magical thing?"</p>
+
+<h3>✨ Modernizr: Your Detection Familiar</h3>
+
+<p>The most powerful tool in your detection arsenal is <strong>Modernizr</strong>, a JavaScript library that's like a magical familiar that can sense all types of browser magic. It creates a global Modernizr object with Boolean properties for each feature it tests.</p>
+
+<pre><code>if (Modernizr.canvas) {
+  // Draw rainbows with canvas magic! 🌈
+} else {
+  // Use a fallback spell
+}</code></pre>
+
+<h2>🦄 Detection Techniques for Each Magic Type</h2>
+
+<h3>Canvas Magic Detection</h3>
+
+<p>To detect if a browser can paint on the magical canvas:</p>
+
+<pre><code>function supportsCanvas() {
+  var elem = document.createElement('canvas');
+  return !!(elem.getContext && elem.getContext('2d'));
+}</code></pre>
+
+<p>This spell creates a test canvas element and checks if it has the mystical <code>getContext</code> method. If it does, you can paint rainbows to your heart's content!</p>
+
+<h3>Video Magic Detection</h3>
+
+<p>Detecting video support is slightly trickier, like determining which berries a unicorn prefers:</p>
+
+<pre><code>function supportsVideo() {
+  var elem = document.createElement('video');
+  return !!elem.canPlayType;
+}
+
+function canPlayH264() {
+  var v = document.createElement('video');
+  return v.canPlayType('video/mp4; codecs="avc1.42E01E"');
+}</code></pre>
+
+<h3>Geolocation Magic Detection</h3>
+
+<p>Finding where unicorns roam (and where you are):</p>
+
+<pre><code>if (navigator.geolocation) {
+  // You can track unicorn locations! 🗺️
+  navigator.geolocation.getCurrentPosition(showPosition);
+}</code></pre>
+
+<h3>Local Storage Magic Detection</h3>
+
+<p>Checking if you have a magical treasure chest:</p>
+
+<pre><code>function supportsLocalStorage() {
+  try {
+    return 'localStorage' in window && 
+           window['localStorage'] !== null;
+  } catch(e) {
+    return false;
+  }
+}</code></pre>
+
+<h2>⚡ The Power of Polyfills</h2>
+
+<p>When a browser doesn't support certain magic, we can sometimes create it using <strong>polyfills</strong> — JavaScript spells that emulate modern features in older browsers. It's like teaching an old dragon new tricks!</p>
+
+<p>For example, if a browser doesn't support the <code>&lt;canvas&gt;</code> element, you can use <strong>ExplorerCanvas</strong> (excanvas.js) to add canvas support to Internet Explorer 8 and earlier. It's not perfect magic, but it's better than leaving ancient dragon riders in the dark!</p>
+
+<blockquote>
+<p>"Detection is not about shutting people out; it's about welcoming everyone in, each through their own magical doorway."</p>
+<cite>— The Inclusive Unicorn Manifesto</cite>
+</blockquote>
+
+<h2>🌈 Best Practices for Magical Detection</h2>
+
+<ol style="list-style: decimal; padding-left: 2em;">
+<li style="margin: 1em 0;"><strong>Always detect features, never browsers.</strong> Browser sniffing is like judging a unicorn by its color — unreliable and potentially offensive.</li>
+
+<li style="margin: 1em 0;"><strong>Provide graceful fallbacks.</strong> If rainbow magic isn't available, offer regular colors. Everyone deserves to see your content!</li>
+
+<li style="margin: 1em 0;"><strong>Test in real browsers.</strong> Simulators are like unicorn paintings — beautiful but not the real thing.</li>
+
+<li style="margin: 1em 0;"><strong>Use established libraries.</strong> Don't reinvent the detection wheel. Modernizr has done the hard work!</li>
+
+<li style="margin: 1em 0;"><strong>Keep it simple.</strong> The best detection is clear, maintainable, and doesn't require a PhD in unicorn studies.</li>
+</ol>
+
+<h2>📊 Detection Reference Table</h2>
+
+<table>
+<thead>
+<tr>
+<th>Magical Feature</th>
+<th>Detection Method</th>
+<th>Polyfill Available?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Canvas</td>
+<td><code>!!elem.getContext</code></td>
+<td>Yes (ExplorerCanvas)</td>
+</tr>
+<tr>
+<td>Video</td>
+<td><code>!!elem.canPlayType</code></td>
+<td>Partial (Flash fallback)</td>
+</tr>
+<tr>
+<td>Geolocation</td>
+<td><code>'geolocation' in navigator</code></td>
+<td>Yes (geo.js)</td>
+</tr>
+<tr>
+<td>Local Storage</td>
+<td><code>'localStorage' in window</code></td>
+<td>Yes (storage.js)</td>
+</tr>
+<tr>
+<td>Web Workers</td>
+<td><code>!!window.Worker</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Offline Apps</td>
+<td><code>!!window.applicationCache</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="semantics.html">Continue to Chapter 4: The Language of Unicorns →</a></p>
+
+<div class="pf">
+<h4>🔍 Detection Wisdom 🔍</h4>
+<div class="moneybags">
+<p>This chapter is inspired by Mark Pilgrim's comprehensive guide to HTML5 feature detection. The techniques shown here are battle-tested and unicorn-approved!</p>
+<p style="margin-top:1em;">Remember: Good detection makes your site accessible to everyone, from those riding cutting-edge rainbow browsers to those on ancient Internet Explorer dragons. Inclusive magic is the best magic!</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Original wisdom by <a href="about.html">Mark Pilgrim</a> • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+
+</body>
+</html>

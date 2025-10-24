@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Moving Pictures - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1>Moving Pictures from the Unicorn Realm</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">V</span>ideo on the web used to require plugins like Flash — like needing a special magical amulet just to watch unicorns frolic. With HTML5's <code>&lt;video&gt;</code> element, watching moving pictures is as natural as breathing! No plugins, no hassle, just pure unicorn magic.</p>
+
+<h2>🎬 The Video Element</h2>
+
+<p>The basic video element is beautifully simple:</p>
+
+<pre><code>&lt;video src="unicorns-frolicking.mp4" controls&gt;
+  Your browser doesn't support video magic!
+&lt;/video&gt;</code></pre>
+
+<p>The <code>controls</code> attribute gives you a built-in play/pause button, volume control, and more — everything you need to control the magical viewing experience!</p>
+
+<h2>🎭 Multiple Video Formats</h2>
+
+<p>Unfortunately, different browsers prefer different video formats (like how some unicorns prefer apples while others prefer carrots). The solution? Provide multiple formats!</p>
+
+<pre><code>&lt;video controls&gt;
+  &lt;source src="unicorn.mp4" type="video/mp4"&gt;
+  &lt;source src="unicorn.webm" type="video/webm"&gt;
+  &lt;source src="unicorn.ogv" type="video/ogg"&gt;
+  Your browser doesn't support the video element!
+&lt;/video&gt;</code></pre>
+
+<p>The browser will use the first format it understands, like a unicorn choosing its favorite treat from a buffet!</p>
+
+<h2>🎨 Video Attributes</h2>
+
+<ul style="list-style:disc;padding-left:2em;">
+<li style="margin:0.5em 0;"><code>controls</code> — Shows the playback controls</li>
+<li style="margin:0.5em 0;"><code>autoplay</code> — Starts playing automatically (use sparingly!)</li>
+<li style="margin:0.5em 0;"><code>loop</code> — Plays the video on repeat, like an eternal unicorn dance</li>
+<li style="margin:0.5em 0;"><code>muted</code> — Starts with sound off</li>
+<li style="margin:0.5em 0;"><code>poster</code> — Image to show before the video plays</li>
+<li style="margin:0.5em 0;"><code>width</code> and <code>height</code> — Size of the video player</li>
+</ul>
+
+<h2>✨ JavaScript Control</h2>
+
+<p>You can control video playback with JavaScript for truly magical interactions:</p>
+
+<pre><code>var video = document.getElementById('myVideo');
+
+// Play
+video.play();
+
+// Pause
+video.pause();
+
+// Jump to a specific time (in seconds)
+video.currentTime = 30;
+
+// Change volume (0.0 to 1.0)
+video.volume = 0.5;
+
+// Check if it's playing
+if (!video.paused) {
+  console.log('Unicorns are dancing!');
+}</code></pre>
+
+<h2>🎵 Audio Too!</h2>
+
+<p>The <code>&lt;audio&gt;</code> element works almost identically to video, perfect for unicorn neighs and magical soundtracks:</p>
+
+<pre><code>&lt;audio controls&gt;
+  &lt;source src="unicorn-song.mp3" type="audio/mpeg"&gt;
+  &lt;source src="unicorn-song.ogg" type="audio/ogg"&gt;
+  Your browser doesn't support audio magic!
+&lt;/audio&gt;</code></pre>
+
+<blockquote>
+<p>"Native video and audio support freed the web from plugin tyranny. Now we can all watch unicorns prance without installing anything!"</p>
+<cite>— The Liberation Manifesto</cite>
+</blockquote>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="geolocation.html">Continue to Chapter 7: Where the Unicorns Are →</a></p>
+
+<div class="pf">
+<h4>🎥 Video Wisdom 🎥</h4>
+<div class="moneybags">
+<p>For production use, you'll want to encode your videos in multiple formats. Tools like FFmpeg can help with this. Also consider using a video hosting service like YouTube or Vimeo for easier management and better performance!</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Original wisdom by <a href="about.html">Mark Pilgrim</a> • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Table of Contents - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+<style>
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
+  margin: 2em 0;
+}
+.chapter-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(230,230,250,0.9));
+  border: 3px solid #9b59b6;
+  border-radius: 15px;
+  padding: 1.5em;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(155,89,182,0.5);
+  border-color: #ff69b4;
+}
+.chapter-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.chapter-card:hover::before {
+  opacity: 1;
+}
+.chapter-number {
+  font-size: 3em;
+  font-weight: bold;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1;
+}
+.chapter-title {
+  font-size: 1.3em;
+  margin: 0.5em 0;
+  color: #9b59b6;
+}
+.chapter-desc {
+  color: #4a2c5e;
+  font-size: 0.95em;
+  margin: 0.5em 0 0 0;
+}
+.chapter-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+</style>
+</head>
+<body>
+
+<h1>📖 Complete Table of Contents 📖</h1>
+
+<p style="text-align:center;font-size:1.2em;margin:2em 0;">
+Navigate through all chapters of your magical HTML5 journey!
+</p>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<div class="chapter-grid">
+
+<div class="chapter-card">
+<a href="introduction.html" class="chapter-link">
+<div class="chapter-number">1</div>
+<h3 class="chapter-title">🦄 Five Magical Truths</h3>
+<p class="chapter-desc">Essential concepts you need to know about HTML5 and unicorn magic. Start here to understand the philosophy behind modern web development.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="past.html" class="chapter-link">
+<div class="chapter-number">2</div>
+<h3 class="chapter-title">📜 Ancient Legends</h3>
+<p class="chapter-desc">The fascinating history of HTML5 - from browser wars to modern standards. Learn how unicorns helped shape the web!</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="detect.html" class="chapter-link">
+<div class="chapter-number">3</div>
+<h3 class="chapter-title">🔮 Detection Spells</h3>
+<p class="chapter-desc">Master the art of feature detection. Learn to sense what magic each browser supports without guessing.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="semantics.html" class="chapter-link">
+<div class="chapter-number">4</div>
+<h3 class="chapter-title">💬 Unicorn Language</h3>
+<p class="chapter-desc">Understand semantic HTML5 elements. Make your markup meaningful with &lt;header&gt;, &lt;nav&gt;, &lt;article&gt;, and friends.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="canvas.html" class="chapter-link">
+<div class="chapter-number">5</div>
+<h3 class="chapter-title">🎨 Rainbow Drawing</h3>
+<p class="chapter-desc">Paint magical pictures with the Canvas API. Includes an interactive demo with rainbows and sparkles!</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="video.html" class="chapter-link">
+<div class="chapter-number">6</div>
+<h3 class="chapter-title">🎬 Moving Pictures</h3>
+<p class="chapter-desc">Native video and audio without plugins. Watch unicorns frolic without Flash!</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="geolocation.html" class="chapter-link">
+<div class="chapter-number">7</div>
+<h3 class="chapter-title">🗺️ Finding Unicorns</h3>
+<p class="chapter-desc">Use the Geolocation API to track where you (and the unicorns) are in the magical realm.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="storage.html" class="chapter-link">
+<div class="chapter-number">8</div>
+<h3 class="chapter-title">💎 Treasure Chest</h3>
+<p class="chapter-desc">Store magical items with localStorage and sessionStorage. Keep data safe between visits!</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="offline.html" class="chapter-link">
+<div class="chapter-number">9</div>
+<h3 class="chapter-title">📡 Offline Magic</h3>
+<p class="chapter-desc">Make your apps work without internet using Service Workers and offline capabilities.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="forms.html" class="chapter-link">
+<div class="chapter-number">10</div>
+<h3 class="chapter-title">📝 Enchanted Forms</h3>
+<p class="chapter-desc">Discover HTML5 form enhancements - new input types, validation, and magical attributes.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="extensibility.html" class="chapter-link">
+<div class="chapter-number">11</div>
+<h3 class="chapter-title">⚡ Advanced Spells</h3>
+<p class="chapter-desc">Web Components, Custom Elements, microdata, and other advanced enchantments.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="history.html" class="chapter-link">
+<div class="chapter-number">12</div>
+<h3 class="chapter-title">⏰ Time Travel</h3>
+<p class="chapter-desc">Manipulate browser history with the History API. Build smooth single-page applications.</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="everything.html" class="chapter-link">
+<div class="chapter-number">A</div>
+<h3 class="chapter-title">📚 Complete Spellbook</h3>
+<p class="chapter-desc">The ultimate reference for detecting every HTML5 feature. Bookmark this page!</p>
+</a>
+</div>
+
+<div class="chapter-card">
+<a href="peeks-pokes-and-pointers.html" class="chapter-link">
+<div class="chapter-number">B</div>
+<h3 class="chapter-title">🔍 Unicorn Wisdom</h3>
+<p class="chapter-desc">Random tips, tricks, resources, and magical pointers for web wizards.</p>
+</a>
+</div>
+
+</div>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<div style="text-align:center;margin:3em 0;">
+<a href="index.html" style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:1em 2em;border-radius:25px;text-decoration:none;display:inline-block;box-shadow:0 5px 15px rgba(155,89,182,0.4);margin:0.5em;">
+🏠 Home
+</a>
+<a href="quick-start.html" style="background:linear-gradient(135deg,#ff69b4,#ff1493);color:white;padding:1em 2em;border-radius:25px;text-decoration:none;display:inline-block;box-shadow:0 5px 15px rgba(255,105,180,0.4);margin:0.5em;">
+🚀 Quick Start
+</a>
+<a href="about.html" style="background:linear-gradient(135deg,#ffd700,#ff8c00);color:white;padding:1em 2em;border-radius:25px;text-decoration:none;display:inline-block;box-shadow:0 5px 15px rgba(255,215,0,0.4);margin:0.5em;">
+ℹ️ About
+</a>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Based on "Dive Into HTML5" by Mark Pilgrim</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+<script>
+// Add sparkle effects when hovering over chapter cards
+$(function() {
+  $('.chapter-card').hover(
+    function() {
+      var sparkle = $('<span style="position:absolute;font-size:24px;pointer-events:none;z-index:1000;">✨</span>');
+      sparkle.css({
+        left: Math.random() * $(this).width(),
+        top: Math.random() * $(this).height()
+      });
+      $(this).append(sparkle);
+      sparkle.animate({
+        top: '-=30px',
+        opacity: 0
+      }, 1000, function() {
+        $(this).remove();
+      });
+    }
+  );
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Advanced Spells - Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+</head>
+<body>
+
+<p>🦄 You are here: <a href="index.html">Unicorn Home</a> <span class="u">✨</span> <a href="index.html">Dive Into Unicorn Magic</a> <span class="u">✨</span></p>
+
+<h1>Advanced Unicorn Spells and Fancy Incantations</h1>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">E</span>xtensibility in HTML5 comes in many forms — microdata, custom data attributes, and more. These advanced features let you add semantic meaning and custom functionality to your magical web creations!</p>
+
+<h2>📊 Microdata: Semantic Annotations</h2>
+
+<p>Microdata lets you embed machine-readable data in your HTML, helping search engines and other tools understand your content better:</p>
+
+<pre><code>&lt;div itemscope itemtype="http://schema.org/Unicorn"&gt;
+  &lt;h2 itemprop="name"&gt;Sparkles the Magnificent&lt;/h2&gt;
+  &lt;p&gt;Horn Length: &lt;span itemprop="hornLength"&gt;42cm&lt;/span&gt;&lt;/p&gt;
+  &lt;p&gt;Magic Level: &lt;span itemprop="magicLevel"&gt;9000&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>🎯 Custom Data Attributes</h2>
+
+<p>Store custom data right in your HTML elements using <code>data-*</code> attributes:</p>
+
+<pre><code>&lt;div class="unicorn" 
+     data-name="Rainbow Dash" 
+     data-power="9000" 
+     data-color="rainbow"&gt;
+  ...
+&lt;/div&gt;
+
+&lt;script&gt;
+var unicorn = document.querySelector('.unicorn');
+console.log(unicorn.dataset.name);  // "Rainbow Dash"
+console.log(unicorn.dataset.power); // "9000"
+unicorn.dataset.color = "purple";   // Change it!
+&lt;/script&gt;</code></pre>
+
+<h2>🔧 Custom Elements (Web Components)</h2>
+
+<p>Create your own HTML elements with custom behavior:</p>
+
+<pre><code>class UnicornCard extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      &lt;div class="unicorn-card"&gt;
+        &lt;h3&gt;🦄 ${this.getAttribute('name')}&lt;/h3&gt;
+        &lt;p&gt;Power: ${this.getAttribute('power')}&lt;/p&gt;
+      &lt;/div&gt;
+    `;
+  }
+}
+
+customElements.define('unicorn-card', UnicornCard);
+
+// Use it like this:
+&lt;unicorn-card name="Sparkles" power="9000"&gt;&lt;/unicorn-card&gt;</code></pre>
+
+<h2>🎨 Shadow DOM</h2>
+
+<p>Encapsulate styles and markup:</p>
+
+<pre><code>class MagicButton extends HTMLElement {
+  constructor() {
+    super();
+    const shadow = this.attachShadow({mode: 'open'});
+    shadow.innerHTML = `
+      &lt;style&gt;
+        button {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          border: none;
+          padding: 1em 2em;
+          border-radius: 25px;
+        }
+      &lt;/style&gt;
+      &lt;button&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/button&gt;
+    `;
+  }
+}
+
+customElements.define('magic-button', MagicButton);</code></pre>
+
+<h2>📡 Web Components Full Example</h2>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Unicorn Components&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;unicorn-profile 
+    name="Sparkles" 
+    color="purple" 
+    power="9000"&gt;
+  &lt;/unicorn-profile&gt;
+
+  &lt;script&gt;
+  class UnicornProfile extends HTMLElement {
+    connectedCallback() {
+      const name = this.getAttribute('name');
+      const color = this.getAttribute('color');
+      const power = this.getAttribute('power');
+      
+      this.innerHTML = `
+        &lt;div style="border:3px solid #9b59b6;padding:1em;border-radius:15px;"&gt;
+          &lt;h2&gt;🦄 ${name}&lt;/h2&gt;
+          &lt;p&gt;Color: ${color}&lt;/p&gt;
+          &lt;p&gt;Power Level: ${power}&lt;/p&gt;
+        &lt;/div&gt;
+      `;
+    }
+  }
+  
+  customElements.define('unicorn-profile', UnicornProfile);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h2>🌟 ARIA Attributes</h2>
+
+<p>Make your magical creations accessible to all:</p>
+
+<pre><code>&lt;button aria-label="Add unicorn to collection"&gt;
+  🦄 +
+&lt;/button&gt;
+
+&lt;div role="alert" aria-live="polite"&gt;
+  Unicorn added successfully!
+&lt;/div&gt;
+
+&lt;nav aria-label="Main navigation"&gt;
+  ...
+&lt;/nav&gt;</code></pre>
+
+<h2>✨ Meta Tags for Rich Snippets</h2>
+
+<pre><code>&lt;!-- Open Graph for social sharing --&gt;
+&lt;meta property="og:title" content="Unicorn Magic Guide"&gt;
+&lt;meta property="og:description" content="Learn magical web development"&gt;
+&lt;meta property="og:image" content="unicorn.jpg"&gt;
+
+&lt;!-- Twitter Cards --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="Unicorn Magic"&gt;</code></pre>
+
+<blockquote>
+<p>"Extensibility isn't about making things complex — it's about making things possible!"</p>
+<cite>— Web Platform Wisdom</cite>
+</blockquote>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p><a href="history.html">Continue to Chapter 12: Time-Traveling Unicorns →</a></p>
+
+<div class="pf">
+<h4>🔮 Extensibility Tips 🔮</h4>
+<div class="moneybags">
+<p>Web Components are powerful for creating reusable, encapsulated UI elements. They're becoming more widely supported and are the future of component-based web development!</p>
+<p style="margin-top:1em;">For production use, consider frameworks like Lit or Stencil that make Web Components easier to work with.</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Unicorn Magic 🦄<br>
+<small style="opacity:0.7;">Original wisdom by <a href="about.html">Mark Pilgrim</a> • Unicorn magic by Web Wizards</small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+
+</body>
+</html>

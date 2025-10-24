@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<title>Dive Into Unicorn Magic ✨🦄</title>
+<link rel="stylesheet" href="unicorn-style.css">
+<style>
+h1:before{content:''}
+h1,h2,h3{padding:0;margin:0;border:0;line-height:1.3;text-align:center;clear:both}
+h1{margin-top:64px;font-size:72px;text-transform:uppercase}
+h2{font-size:48px;margin-bottom:32px}
+.hero-unicorn {
+  text-align: center;
+  font-size: 10em;
+  margin: 0.2em 0;
+  animation: rainbow-spin 10s infinite linear;
+}
+@keyframes rainbow-spin {
+  0% { filter: hue-rotate(0deg); transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { filter: hue-rotate(360deg); transform: scale(1); }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-unicorn">🦄</div>
+
+<hgroup>
+<h1>Dive Into Unicorn Magic</h1>
+<h2>A Mystical Journey Through<br>Web Enchantments</h2>
+<h3>✨ Where Technology Meets Fantasy ✨</h3>
+</hgroup>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<p class="f"><span style="font-size:4em;float:left;line-height:0.8;margin:0.1em 0.2em 0 0;background:linear-gradient(45deg,#ffd700,#ff69b4,#87ceeb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold;">O</span>nce upon a time, in a realm where unicorns roamed free and magic flowed through every line of code, there existed a mystical tome of web wisdom. <strong>Dive Into Unicorn Magic</strong> is an enchanted guide that transforms the ancient art of HTML5 into a sparkling adventure through digital wonderlands. Born from the dreams of rainbow-maned unicorns and crafted by the wisest web wizards, this magical manuscript reveals the secrets of creating extraordinary web experiences. Join us on this glittering journey where every tag becomes a spell, every attribute a charm, and every element a gateway to infinite possibilities. The secrets of the unicorn web await those brave enough to learn! 🦄✨
+
+<h3>🌈 Magical Table of Contents 🌈</h3>
+
+<ol>
+<li><a href="introduction.html">The First Unicorn Tale: Five Magical Truths You Must Know</a></li>
+<li><a href="past.html">Ancient Unicorn Legends: The History of Web Enchantments</a></li>
+<li><a href="detect.html">Unicorn Detection Spells: Finding Magic in Every Browser</a></li>
+<li><a href="semantics.html">The Language of Unicorns: What Does It All Mean?</a></li>
+<li><a href="canvas.html">Rainbow Drawing Magic: Creating Art with Unicorn Power</a></li>
+<li><a href="video.html">Moving Pictures from the Unicorn Realm</a></li>
+<li><a href="geolocation.html">Where the Unicorns Are (And So Are You)</a></li>
+<li><a href="storage.html">The Unicorn's Treasure Chest: A Place for Your Magical Items</a></li>
+<li><a href="offline.html">Unicorn Magic That Works Without Rainbows</a></li>
+<li><a href="forms.html">Enchanted Forms and Magical Inputs</a></li>
+<li><a href="extensibility.html">Advanced Unicorn Spells and Fancy Incantations</a></li>
+<li><a href="history.html">Time-Traveling Unicorns: Manipulating History with Grace</a></li>
+<li class="app" data-letter="A"><a href="everything.html">The Complete Unicorn Spellbook: Detecting All The Magic</a></li>
+<li class="app" data-letter="B"><a href="peeks-pokes-and-pointers.html">Unicorn Wisdom: Peeks, Pokes and Magical Pointers</a></li>
+</ol>
+
+<p class="a">🌟 ✨ 🌈</p>
+
+<blockquote style="text-align:center;font-size:1.2em;background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,105,180,0.2));">
+<p>💝 "Magic is not about power, it's about sharing the wonder with others." 💝</p>
+<p><cite>— The Wise Unicorn Elder</cite></p>
+<p style="margin-top:1em;font-size:0.9em;">(Because hoarding magic makes your horn lose its sparkle!)</p>
+</blockquote>
+
+<div class="pf" style="margin-top:3em;">
+<h4>🦄 Did You Discover Something Magical? 🦄</h4>
+<div class="moneybags">
+<p>This mystical journey is a reimagined adventure based on the legendary "Dive Into HTML5" by Mark Pilgrim. We've transformed it into a unicorn-themed wonderland to make learning web technologies more magical and memorable!</p>
+<p style="margin-top:1em;">✨ <strong>Original work:</strong> <a href="https://diveintohtml5.info/" target="_blank">Dive Into HTML5</a> by Mark Pilgrim</p>
+<p style="margin-top:0.5em;">🌈 <strong>This magical remix:</strong> Created with love, sparkles, and lots of unicorn dust!</p>
+</div>
+</div>
+
+<p class="c">🦄 Enchanted with Love by Unicorn Web Wizards 🦄<br>
+<small style="opacity:0.7;">Based on "Dive Into HTML5" by <a href="about.html">Mark Pilgrim</a></small></p>
+
+<script src="j/jquery.js"></script>
+<script src="j/dih5.js"></script>
+<script>
+$(function() {
+  $("ol").css("list-style", "none");
+  $("li").each(function(i) {
+    var num = i + 1;
+    if ($(this).hasClass("app")) {
+      var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+      num = letters[i - 12];
+      $(this).attr('data-letter', num);
+    }
+  });
+  
+  // Add magical sparkle effect
+  setInterval(function() {
+    var sparkle = $('<span style="position:fixed;font-size:20px;pointer-events:none;z-index:9999;">✨</span>');
+    sparkle.css({
+      left: Math.random() * window.innerWidth,
+      top: Math.random() * window.innerHeight,
+      opacity: 1
+    });
+    $('body').append(sparkle);
+    sparkle.animate({
+      top: '-=50px',
+      opacity: 0
+    }, 2000, function() {
+      $(this).remove();
+    });
+  }, 3000);
+  
+  // Rainbow trail effect
+  var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+  var colorIndex = 0;
+  setInterval(function() {
+    $('body').css('box-shadow', '0 0 50px ' + colors[colorIndex]);
+    colorIndex = (colorIndex + 1) % colors.length;
+  }, 500);
+});
+</script>
+
+</body>
+</html>

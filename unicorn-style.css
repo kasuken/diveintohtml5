@@ -1,0 +1,446 @@
+/*
+"Dive Into Unicorn Magic" stylesheet
+A magical unicorn-themed redesign
+*/
+
+/* Import beautiful fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* CSS Variables for Unicorn Theme */
+:root {
+  --unicorn-purple: #9b59b6;
+  --unicorn-pink: #ff69b4;
+  --unicorn-blue: #87ceeb;
+  --unicorn-gold: #ffd700;
+  --unicorn-lavender: #e6e6fa;
+  --unicorn-mint: #98ff98;
+  --magic-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --sparkle-gradient: linear-gradient(45deg, #ffd700, #ff69b4, #87ceeb, #9b59b6);
+  --text-dark: #4a2c5e;
+  --text-light: #ffffff;
+}
+
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.7;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+}
+
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2em;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 50px rgba(155, 89, 182, 0.5);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Magical sparkle effect */
+body::before {
+  content: '✨';
+  position: fixed;
+  font-size: 2em;
+  animation: sparkle 3s infinite;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    top: 10%; 
+    left: 10%; 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 1;
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+/* Floating unicorns */
+body::after {
+  content: '🦄';
+  position: fixed;
+  font-size: 3em;
+  bottom: 20px;
+  right: 20px;
+  animation: float 4s ease-in-out infinite;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+  color: var(--unicorn-purple);
+  text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+  margin: 1.5em 0 0.5em 0;
+  position: relative;
+}
+
+h1 {
+  font-size: 3.5em;
+  text-align: center;
+  background: var(--magic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+  animation: shimmer 3s infinite;
+  padding: 0.2em 0;
+}
+
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+h1::before {
+  content: '🦄 ';
+  -webkit-text-fill-color: initial;
+  background: none;
+}
+
+h1::after {
+  content: ' 🦄';
+  -webkit-text-fill-color: initial;
+  background: none;
+}
+
+h2 {
+  font-size: 2.5em;
+  text-align: center;
+  color: var(--unicorn-pink);
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 1.8em;
+  text-align: center;
+  color: var(--unicorn-purple);
+  border-bottom: 3px solid var(--unicorn-pink);
+  padding-bottom: 0.3em;
+  display: inline-block;
+  width: 100%;
+}
+
+h4 {
+  font-size: 1.4em;
+  color: var(--unicorn-blue);
+}
+
+/* Links */
+a {
+  color: var(--unicorn-purple);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: var(--unicorn-pink);
+  border-bottom-color: var(--unicorn-pink);
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+a::after {
+  content: '✨';
+  opacity: 0;
+  position: absolute;
+  margin-left: 5px;
+  transition: opacity 0.3s;
+}
+
+a:hover::after {
+  opacity: 1;
+}
+
+/* Paragraphs */
+p {
+  margin: 1em 0;
+  text-align: justify;
+}
+
+.f {
+  font-size: 1.2em;
+  margin-top: 2em;
+}
+
+.f::first-letter {
+  font-size: 4em;
+  float: left;
+  line-height: 0.8;
+  margin: 0.1em 0.1em 0 0;
+  background: var(--sparkle-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+/* Decorative elements */
+.a {
+  text-align: center;
+  font-size: 2em;
+  color: var(--unicorn-gold);
+  margin: 2em 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* Table of Contents */
+ol {
+  list-style: none;
+  counter-reset: toc-counter;
+  padding: 0;
+}
+
+ol li {
+  counter-increment: toc-counter;
+  margin: 1.5em 0;
+  padding: 1em;
+  background: linear-gradient(90deg, rgba(155, 89, 182, 0.1) 0%, rgba(255, 105, 180, 0.1) 100%);
+  border-left: 5px solid var(--unicorn-purple);
+  border-radius: 0 15px 15px 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+ol li::before {
+  content: counter(toc-counter);
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--unicorn-purple);
+  opacity: 0.3;
+}
+
+ol li.app::before {
+  content: attr(data-letter);
+}
+
+ol li:hover {
+  background: linear-gradient(90deg, rgba(155, 89, 182, 0.2) 0%, rgba(255, 105, 180, 0.2) 100%);
+  transform: translateX(10px);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+}
+
+ol li a {
+  display: block;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: none;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 2em 0;
+  padding: 1.5em;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(135, 206, 235, 0.1));
+  border-left: 5px solid var(--unicorn-pink);
+  border-radius: 10px;
+  font-style: italic;
+  position: relative;
+}
+
+blockquote::before {
+  content: '🌈';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 2em;
+}
+
+blockquote p {
+  margin: 0.5em 0;
+}
+
+/* Code blocks */
+code, pre {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: rgba(155, 89, 182, 0.1);
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+  color: var(--unicorn-purple);
+}
+
+pre {
+  padding: 1em;
+  overflow-x: auto;
+  border: 2px solid var(--unicorn-lavender);
+  margin: 1em 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Footer */
+.c {
+  text-align: center;
+  margin-top: 3em;
+  padding-top: 2em;
+  border-top: 3px solid var(--unicorn-pink);
+  color: var(--unicorn-purple);
+  font-style: italic;
+  clear: both;
+}
+
+/* Navigation breadcrumbs */
+p:first-of-type {
+  background: linear-gradient(90deg, rgba(255, 105, 180, 0.2), transparent);
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  margin-bottom: 2em;
+}
+
+/* Special blocks */
+.pf {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 105, 180, 0.1));
+  border: 3px solid var(--unicorn-gold);
+  border-radius: 15px;
+  padding: 2em;
+  margin: 2em 0;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+}
+
+.moneybags {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1em;
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+/* Abbreviations */
+abbr {
+  text-decoration: none;
+  border-bottom: 2px dotted var(--unicorn-purple);
+  cursor: help;
+  color: var(--unicorn-purple);
+  font-weight: 600;
+}
+
+/* Unicode elements */
+.u {
+  color: var(--unicorn-pink);
+  font-weight: bold;
+}
+
+/* Emphasis */
+em {
+  color: var(--unicorn-pink);
+  font-style: italic;
+}
+
+strong {
+  color: var(--unicorn-purple);
+  font-weight: bold;
+}
+
+/* Citations */
+cite {
+  color: var(--unicorn-blue);
+  font-style: italic;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.2);
+}
+
+th, td {
+  padding: 1em;
+  text-align: left;
+  border-bottom: 1px solid var(--unicorn-lavender);
+}
+
+th {
+  background: var(--magic-gradient);
+  color: white;
+  font-weight: bold;
+}
+
+tr:hover {
+  background: rgba(255, 105, 180, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 1em;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+  }
+  
+  h2 {
+    font-size: 2em;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+  }
+  
+  ol li {
+    padding: 0.7em;
+  }
+}
+
+/* Magical rainbow border animation */
+@keyframes rainbow-border {
+  0% { border-color: #ff0000; }
+  14% { border-color: #ff7f00; }
+  28% { border-color: #ffff00; }
+  42% { border-color: #00ff00; }
+  57% { border-color: #0000ff; }
+  71% { border-color: #4b0082; }
+  85% { border-color: #9400d3; }
+  100% { border-color: #ff0000; }
+}
+
+/* Add sparkle cursor trail effect */
+html {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="15" font-size="16">✨</text></svg>'), auto;
+}
