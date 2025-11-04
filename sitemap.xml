@@ -4,7 +4,7 @@
   
   <!-- Home Page -->
   <url>
-    <loc>https://yourdomain.com/</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,84 +12,84 @@
   
   <!-- Main Chapters -->
   <url>
-    <loc>https://yourdomain.com/introduction.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/introduction.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/past.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/past.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/detect.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/detect.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/semantics.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/semantics.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/canvas.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/canvas.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/video.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/video.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/geolocation.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/geolocation.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/storage.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/storage.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/offline.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/offline.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/forms.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/forms.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/extensibility.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/extensibility.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/history.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/history.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -97,42 +97,42 @@
   
   <!-- New 2025 Chapters -->
   <url>
-    <loc>https://yourdomain.com/webworkers.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/webworkers.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/websockets.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/websockets.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/dragdrop.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/dragdrop.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/notifications.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/notifications.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/fetch.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/fetch.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/webgl.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/webgl.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -140,28 +140,28 @@
   
   <!-- Reference Pages -->
   <url>
-    <loc>https://yourdomain.com/everything.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/everything.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/peeks-pokes-and-pointers.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/peeks-pokes-and-pointers.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/table-of-contents.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/table-of-contents.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://yourdomain.com/about.html</loc>
+    <loc>https://kasuken.github.io/diveintohtml5/about.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
